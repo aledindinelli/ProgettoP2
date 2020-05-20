@@ -1,22 +1,87 @@
-#ifndef CONTENITORE_H
-#define CONTENITORE_H
+#ifndef VETTORE_H
+#define VETTORE_H
 
-template<class T>
-class Vettore
-{
+template <class T>
+class Vettore {
 private:
-    T* info;
+    T *container;
     unsigned int _size;
+    unsigned int _capacity;
 
 public:
-    Vettore(unsigned int s=0, T x=0);
-    Vettore(const Vettore &);
+    Vettore();
+    explicit Vettore(unsigned int);
+    Vettore(T, unsigned int);
+    Vettore(const Vettore<T> &);
+
     ~Vettore();
+
+    Vettore & operator=(const Vettore<T> &);
+
+    bool operator==(const Vettore<T> &) const;
+    bool operator!=(const Vettore<T> &) const;
+
+    unsigned int getCapacity() const;
     unsigned int getSize() const;
-    Vettore& operator= (const Vettore &);
-    bool operator== (const Vettore &) const;
-    T& operator[](unsigned int) const;
-    void append(const Vettore &);
+
+    void push_back(T &);
+
+    // void pop_back();
+
+    T& operator[](unsigned int);
+    const T& operator[](unsigned int) const;
+
+    class Iteratore {
+        friend class Vettore;
+    private:
+        T* punt;
+    public:
+        Iteratore();
+        Iteratore(const Iteratore &);
+        ~Iteratore();
+
+        // Ricontrollo metodi const
+        bool operator!=(const Iteratore &);
+        bool operator==(const Iteratore &);
+        bool operator<(const Iteratore &);
+        bool operator<=(const Iteratore &);
+        bool operator>(const Iteratore &);
+        bool operator>=(const Iteratore &);
+
+        Iteratore& operator++();
+        Iteratore& operator--();
+
+        T& operator*();
+    };
+
+    class ConstIteratore {
+        friend class Vettore;
+    private:
+        const T* punt;
+    public:
+        ConstIteratore();
+        ConstIteratore(const ConstIteratore &);
+        ~Iteratore();
+
+        bool operator!=(const ConstIteratore &) const;
+        bool operator==(const ConstIteratore &) const;
+        bool operator<(const ConstIteratore &) const;
+        bool operator<=(const ConstIteratore &) const;
+        bool operator>(const ConstIteratore &) const;
+        bool operator>=(const ConstIteratore &) const;
+
+        ConstIteratore& operator++();
+        ConstIteratore& operator--();
+
+        const T& operator*();
+    };
+
+    Iteratore begin();
+    Iteratore end();
+    ConstIteratore begin() const;
+    ConstIteratore end() const;
+
+    void erase(Iteratore pos);
 };
 
-#endif // CONTENITORE_H
+#endif // VETTORE_H
