@@ -114,25 +114,25 @@ const T& Vettore<T>::operator[](unsigned int i) const
 }
 
 template<class T>
-typename Vettore<T>::Iteratore Vettore<T>::begin()
+typename Vettore<T>::Iteratore Vettore<T>::itBegin() const
 {
     return container[0];
 }
 
 template<class T>
-typename Vettore<T>::Iteratore Vettore<T>::end()
+typename Vettore<T>::Iteratore Vettore<T>::itEnd() const
 {
     return container[_size];
 }
 
 template<class T>
-typename Vettore<T>::ConstIteratore Vettore<T>::begin() const
+typename Vettore<T>::ConstIteratore Vettore<T>::citBegin() const
 {
     return container[0];
 }
 
 template<class T>
-typename Vettore<T>::ConstIteratore Vettore<T>::end() const
+typename Vettore<T>::ConstIteratore Vettore<T>::citEnd() const
 {
     return container[_size];
 }
@@ -230,7 +230,7 @@ template<class T>
 Vettore<T>::ConstIteratore::ConstIteratore(const Vettore::ConstIteratore & cit) : punt(cit.punt) {}
 
 template<class T>
-Vettore<T>::ConstIteratore::~Iteratore()
+Vettore<T>::ConstIteratore::~ConstIteratore()
 {
     if (this) {
         delete this;
