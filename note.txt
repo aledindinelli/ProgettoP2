@@ -1,0 +1,2 @@
+- Implementare metodo polimorfo scheda()
+- File XML per risultato scheda() da dare alla libreria grafica

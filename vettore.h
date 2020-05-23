@@ -40,7 +40,6 @@ public:
         Iteratore(const Iteratore &);
         ~Iteratore();
 
-        // Ricontrollo metodi const
         bool operator!=(const Iteratore &) const;
         bool operator==(const Iteratore &) const;
         bool operator<(const Iteratore &) const;
@@ -51,7 +50,8 @@ public:
         Iteratore& operator++();
         Iteratore& operator--();
 
-        T& operator*();
+        T* operator->() const;
+        T& operator*() const;
     };
 
     class ConstIteratore {
@@ -73,13 +73,14 @@ public:
         ConstIteratore& operator++();
         ConstIteratore& operator--();
 
-        const T& operator*();
+        const T* operator->() const;
+        const T& operator*() const;
     };
 
-    Iteratore itBegin() const;
-    Iteratore itEnd() const;
-    ConstIteratore citBegin() const;
-    ConstIteratore citEnd() const;
+    Iteratore Begin();
+    Iteratore End();
+    ConstIteratore Begin() const;
+    ConstIteratore End() const;
 
     void erase(Iteratore pos);
 };

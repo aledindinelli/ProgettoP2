@@ -114,25 +114,25 @@ const T& Vettore<T>::operator[](unsigned int i) const
 }
 
 template<class T>
-typename Vettore<T>::Iteratore Vettore<T>::itBegin() const
+typename Vettore<T>::Iteratore Vettore<T>::Begin()
 {
     return container[0];
 }
 
 template<class T>
-typename Vettore<T>::Iteratore Vettore<T>::itEnd() const
+typename Vettore<T>::Iteratore Vettore<T>::End()
 {
     return container[_size];
 }
 
 template<class T>
-typename Vettore<T>::ConstIteratore Vettore<T>::citBegin() const
+typename Vettore<T>::ConstIteratore Vettore<T>::Begin() const
 {
     return container[0];
 }
 
 template<class T>
-typename Vettore<T>::ConstIteratore Vettore<T>::citEnd() const
+typename Vettore<T>::ConstIteratore Vettore<T>::End() const
 {
     return container[_size];
 }
@@ -166,57 +166,63 @@ Vettore<T>::Iteratore::~Iteratore()
 }
 
 template<class T>
-bool Vettore<T>::Iteratore::operator!=(const Iteratore & it)
+bool Vettore<T>::Iteratore::operator!=(const Iteratore & it) const
 {
     return punt != it.punt;
 }
 
 template<class T>
-bool Vettore<T>::Iteratore::operator==(const Iteratore & it)
+bool Vettore<T>::Iteratore::operator==(const Iteratore & it) const
 {
     return punt == it.punt;
 }
 
 template<class T>
-bool Vettore<T>::Iteratore::operator<(const Iteratore & it)
+bool Vettore<T>::Iteratore::operator<(const Iteratore & it) const
 {
     return punt < it.punt;
 }
 
 template<class T>
-bool Vettore<T>::Iteratore::operator<=(const Iteratore & it)
+bool Vettore<T>::Iteratore::operator<=(const Iteratore & it) const
 {
     return punt <= it.punt;
 }
 
 template<class T>
-bool Vettore<T>::Iteratore::operator>(const Iteratore & it)
+bool Vettore<T>::Iteratore::operator>(const Iteratore & it) const
 {
     return punt > it.punt;
 }
 
 template<class T>
-bool Vettore<T>::Iteratore::operator>=(const Iteratore & it)
+bool Vettore<T>::Iteratore::operator>=(const Iteratore & it) const
 {
     return punt >= it.punt;
 }
 
 template<class T>
-typename Vettore<T>::Iteratore &Vettore<T>::Iteratore::operator++()
+typename Vettore<T>::Iteratore& Vettore<T>::Iteratore::operator++()
 {
     punt++;
     return *this;
 }
 
 template<class T>
-typename Vettore<T>::Iteratore &Vettore<T>::Iteratore::operator--()
+typename Vettore<T>::Iteratore& Vettore<T>::Iteratore::operator--()
 {
     punt--;
     return *this;
 }
 
 template<class T>
-T &Vettore<T>::Iteratore::operator*()
+T* Vettore<T>::Iteratore::operator->() const
+{
+    return punt;
+}
+
+template<class T>
+T& Vettore<T>::Iteratore::operator*() const
 {
     return *punt;
 }
@@ -274,21 +280,29 @@ bool Vettore<T>::ConstIteratore::operator>=(const Vettore::ConstIteratore & cit)
 }
 
 template<class T>
-typename Vettore<T>::ConstIteratore &Vettore<T>::ConstIteratore::operator++()
+typename Vettore<T>::ConstIteratore& Vettore<T>::ConstIteratore::operator++()
 {
     punt++;
     return *this;
 }
 
 template<class T>
-typename Vettore<T>::ConstIteratore &Vettore<T>::ConstIteratore::operator--()
+typename Vettore<T>::ConstIteratore& Vettore<T>::ConstIteratore::operator--()
 {
     punt--;
     return *this;
 }
 
 template<class T>
-const T &Vettore<T>::ConstIteratore::operator*()
+const T* Vettore<T>::ConstIteratore::operator->() const
+{
+    return punt;
+}
+
+template<class T>
+const T& Vettore<T>::ConstIteratore::operator*() const
 {
     return *punt;
 }
+
+

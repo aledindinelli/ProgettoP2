@@ -15,6 +15,7 @@ public:
     virtual std::string getNome() const;
     virtual unsigned short getEta() const;
     virtual unsigned short costo() const = 0;
+    virtual mansione() const;
 };
 
 #endif // PERSONA_H
