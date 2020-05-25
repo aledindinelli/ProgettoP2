@@ -14,9 +14,24 @@ bool Studente::getRegolare() const
     return regolare;
 }
 
-unsigned short Studente::getMedia() const
+double Studente::getMedia() const
 {
     return media;
+}
+
+void Studente::setCorso(corsoLaurea c)
+{
+    corso = c;
+}
+
+void Studente::setRegolare(bool r)
+{
+    regolare = r;
+}
+
+void Studente::setMedia(double m)
+{
+    media = m;
 }
 
 unsigned short Studente::tasse() const
@@ -34,7 +49,7 @@ unsigned short Studente::tasse() const
     return tot;
 }
 
-unsigned short Studente::costo() const
+double Studente::costo() const
 {
     switch (corso) {
     case ingegneria: return 900 - tasse();
@@ -42,4 +57,10 @@ unsigned short Studente::costo() const
     case psicologia: return 800 - tasse();
     case economia: return 950 - tasse();
     }
+}
+
+void Studente::gestione()
+{
+    regolare = true;
+    media += 1;
 }

@@ -10,6 +10,11 @@ private:
 
 public:
     Dottorando(std::string, unsigned short, corsoLaurea, bool, unsigned short, std::string);
+    virtual ~Dottorando() = default;
+
+    std::string getRicerca() const;
+    void setRicerca(std::string);
+
     virtual unsigned short tasse() const;
 };
 

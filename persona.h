@@ -11,11 +11,16 @@ private:
 
 public:
     Persona(std::string, unsigned short);
-    virtual ~Persona();
+    virtual ~Persona() = default;
+
     virtual std::string getNome() const;
     virtual unsigned short getEta() const;
-    virtual unsigned short costo() const = 0;
-    virtual mansione() const;
+
+    virtual void setNome(std::string);
+    virtual void setEta(unsigned short);
+
+    virtual double costo() const = 0;
+    virtual void gestione() = 0;
 };
 
 #endif // PERSONA_H

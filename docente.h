@@ -7,16 +7,22 @@ class Docente : public Impiegato
 {
 private:
     bool cattedra;
-    static unsigned short pagaOraria;
-    static unsigned short bonusDocente;
+    double pagaOraria = 20;
+    static double bonusDocente;
 
 public:
-    Docente(std::string, unsigned short, unsigned short, bool);
-    virtual ~Docente();
-    virtual unsigned short costo() const;
+    Docente(std::string, unsigned short, unsigned short, bool, double);
+    virtual ~Docente() = default;
+
+    bool getCattedra() const;
+    void setCattedra(bool);
+    double getPagaOraria() const;
+    void setPagaOraria(double);
+
+    virtual double costo() const;
+    virtual void gestione() ;
 };
 
-unsigned short Docente::pagaOraria = 20;
-unsigned short Docente::bonusDocente = 300;
+double Docente::bonusDocente = 300;
 
 #endif // DOCENTE_H

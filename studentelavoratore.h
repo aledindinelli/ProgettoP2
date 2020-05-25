@@ -7,16 +7,16 @@
 class StudenteLavoratore : public Studente, Impiegato
 {
 private:
-    static unsigned short pagaOraria;
+    double pagaOraria;
 
 public:
-    StudenteLavoratore(std::string, unsigned short, corsoLaurea, bool, unsigned short, unsigned short);
-    virtual ~StudenteLavoratore();
-    virtual unsigned short tasse() const;
-    virtual unsigned short costo() const;
-    unsigned short rimborso() const;
-};
+    StudenteLavoratore(std::string, unsigned short, corsoLaurea, bool, unsigned short, unsigned short, double);
+    virtual ~StudenteLavoratore() = default;
 
-unsigned short StudenteLavoratore::pagaOraria = 10;
+    virtual unsigned short tasse() const;
+    virtual double costo() const;
+    unsigned short rimborso() const;
+    virtual void gestione();
+};
 
 #endif // STUDENTELAVORATORE_H

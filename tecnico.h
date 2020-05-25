@@ -6,14 +6,17 @@
 class Tecnico : public Impiegato
 {
 private:
-    static unsigned short pagaOraria;
+    double pagaOraria = 15;
 
 public:
-    Tecnico(std::string, unsigned short, unsigned short);
-    virtual ~Tecnico();
-    virtual unsigned short costo() const;
-};
+    Tecnico(std::string, unsigned short, unsigned short, double);
+    virtual ~Tecnico() = default;
 
-unsigned short Tecnico::pagaOraria = 15;
+    double getPagaOraria() const;
+    void setPagaOraria(double);
+
+    virtual double costo() const;
+    virtual void gestione();
+};
 
 #endif // TECNICO_H

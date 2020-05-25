@@ -10,8 +10,10 @@ private:
 
 public:
     Impiegato(std::string, unsigned short, unsigned short);
-    virtual ~Impiegato();
+    virtual ~Impiegato() = default;
+
     virtual unsigned short getOreLavoro() const;
+    virtual void setOreLavoro(unsigned short);
 };
 
 #endif // IMPIEGATO_H

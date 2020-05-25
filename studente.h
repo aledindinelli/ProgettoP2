@@ -10,16 +10,24 @@ class Studente : virtual public Persona
 private:
     corsoLaurea corso;
     bool regolare;
-    unsigned short media;
+    double media;
+    // double ultimoVoto;
 
 public:
     Studente(std::string, unsigned short, corsoLaurea, bool, unsigned short);
-    virtual ~Studente();
+    virtual ~Studente() = 0;
+
     virtual corsoLaurea getCorso() const;
     virtual bool getRegolare() const;
-    virtual unsigned short getMedia() const;
+    virtual double getMedia() const;
+
+    virtual void setCorso(corsoLaurea);
+    virtual void setRegolare(bool);
+    virtual void setMedia(double);
+
     virtual unsigned short tasse() const;
-    virtual unsigned short costo() const;
+    virtual double costo() const;
+    virtual void gestione();
 };
 
 #endif // STUDENTE_H
