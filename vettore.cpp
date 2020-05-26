@@ -4,10 +4,7 @@ template<class T>
 Vettore<T>::Vettore() : container(nullptr), _size(0), _capacity(0) {}
 
 template<class T>
-Vettore<T>::Vettore(unsigned int s) : _size(s), _capacity(s)
-{
-    container = new T[s];
-}
+Vettore<T>::Vettore(unsigned int s) : container(s!=0 ? new T[s] : nullptr), _size(s), _capacity(s) {}
 
 template<class T>
 Vettore<T>::Vettore(T t, unsigned int s) : _size(s), _capacity(s)

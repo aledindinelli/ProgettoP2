@@ -20,6 +20,4 @@ public:
     virtual void gestione();
 };
 
-unsigned short Laureando::bonusVoto = 200;
-
 #endif // LAUREANDO_H

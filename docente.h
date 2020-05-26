@@ -23,6 +23,4 @@ public:
     virtual void gestione() ;
 };
 
-double Docente::bonusDocente = 300;
-
 #endif // DOCENTE_H

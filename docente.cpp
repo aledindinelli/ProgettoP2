@@ -1,5 +1,7 @@
 #include "docente.h"
 
+double Docente::bonusDocente = 300;
+
 Docente::Docente(std::string n, unsigned short e, unsigned short o, bool c, double p)
     : Persona(n,e), Impiegato(n,e,o), cattedra(c), pagaOraria(p) {}
 
