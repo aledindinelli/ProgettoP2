@@ -9,7 +9,10 @@ SOURCES += \
         impiegato.cpp \
         laureando.cpp \
         main.cpp \
+<<<<<<< HEAD
         modello.cpp \
+=======
+>>>>>>> master
         persona.cpp \
         studente.cpp \
         studentelavoratore.cpp \
@@ -21,7 +24,10 @@ HEADERS += \
     dottorando.h \
     impiegato.h \
     laureando.h \
+<<<<<<< HEAD
     modello.h \
+=======
+>>>>>>> master
     persona.h \
     studente.h \
     studentelavoratore.h \
