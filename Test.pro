@@ -13,8 +13,7 @@ SOURCES += \
         persona.cpp \
         studente.cpp \
         studentelavoratore.cpp \
-        tecnico.cpp \
-        vettore.cpp
+        tecnico.cpp
 
 HEADERS += \
     docente.h \

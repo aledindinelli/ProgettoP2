@@ -11,7 +11,7 @@
 class Modello
 {
 private:
-    Vettore<Persona*> v;
+    Vettore<Persona*> V;
 
 public:
     Modello();
