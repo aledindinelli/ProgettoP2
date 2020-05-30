@@ -1,6 +1,19 @@
-#include <iostream>
+#include "modello.h"
+#include "controller.h"
+#include "vista.h"
 
-int main()
+#include <QApplication>
+
+int main(int argc, char *argv[])
 {
-    std::cout << "Hello World!" << std::endl;
+    QApplication a(argc, argv);
+
+    Modello m;
+    Controller c(&m);
+    Vista v(&c);
+
+    c.setView(&v);
+    v.show();
+
+    return a.exec();
 }

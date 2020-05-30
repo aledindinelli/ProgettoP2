@@ -8,13 +8,23 @@
 #include "dottorando.h"
 #include "studentelavoratore.h"
 
+//per test
+#include <iostream>
+using namespace std;
+
 class Modello
 {
 private:
-    Vettore<Persona*> V;
+    Vettore<Persona*> vett;
 
 public:
     Modello();
+
+    void resetVett();
+
+    //per test
+    void popolaVettore();
+    void leggiVettore(Vettore<Persona*>);
 };
 
 #endif // MODELLO_H

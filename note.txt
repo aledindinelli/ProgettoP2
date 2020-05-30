@@ -1,3 +1,0 @@
-- Implementare metodo scheda()
-- File XML per risultato scheda() da dare alla libreria grafica
-- Metodo per modificare media/ultimoVoto

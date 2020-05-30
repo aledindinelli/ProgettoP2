@@ -10,7 +10,7 @@ private:
     static unsigned short bonusVoto;
 
 public:
-    Laureando(std::string, unsigned short, corsoLaurea, bool, unsigned short, unsigned short);
+    Laureando(std::string, unsigned short, corsoLaurea, bool, double, unsigned short);
     virtual ~Laureando() = default;
 
     unsigned short getVotoBase() const;
