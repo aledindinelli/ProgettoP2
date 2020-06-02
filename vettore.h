@@ -180,7 +180,7 @@ void Vettore<T>::push_back(T &t)
         container = temp;
         _size++;
     } else {
-        container[_size] = new T(t);
+        container[_size] = t;
         _size++;
     }
 }
