@@ -24,7 +24,7 @@ public:
 
     //per test
     void popolaVettore();
-    void leggiVettore(Vettore<Persona*>);
+    void leggiVettore(const Vettore<Persona *> &);
 };
 
 #endif // MODELLO_H

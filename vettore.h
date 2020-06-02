@@ -42,10 +42,6 @@ public:
 
         bool operator!=(const Iteratore &) const;
         bool operator==(const Iteratore &) const;
-        bool operator<(const Iteratore &) const;
-        bool operator<=(const Iteratore &) const;
-        bool operator>(const Iteratore &) const;
-        bool operator>=(const Iteratore &) const;
 
         Iteratore& operator++();
         Iteratore& operator--();
@@ -65,10 +61,6 @@ public:
 
         bool operator!=(const ConstIteratore &) const;
         bool operator==(const ConstIteratore &) const;
-        bool operator<(const ConstIteratore &) const;
-        bool operator<=(const ConstIteratore &) const;
-        bool operator>(const ConstIteratore &) const;
-        bool operator>=(const ConstIteratore &) const;
 
         ConstIteratore& operator++();
         ConstIteratore& operator--();
@@ -180,7 +172,7 @@ void Vettore<T>::push_back(T &t)
         container = temp;
         _size++;
     } else {
-        container[_size] = t;
+        container[_size] = new T(t);
         _size++;
     }
 }
@@ -262,30 +254,6 @@ bool Vettore<T>::Iteratore::operator==(const Iteratore & it) const
 }
 
 template<class T>
-bool Vettore<T>::Iteratore::operator<(const Iteratore & it) const
-{
-    return punt < it.punt;
-}
-
-template<class T>
-bool Vettore<T>::Iteratore::operator<=(const Iteratore & it) const
-{
-    return punt <= it.punt;
-}
-
-template<class T>
-bool Vettore<T>::Iteratore::operator>(const Iteratore & it) const
-{
-    return punt > it.punt;
-}
-
-template<class T>
-bool Vettore<T>::Iteratore::operator>=(const Iteratore & it) const
-{
-    return punt >= it.punt;
-}
-
-template<class T>
 typename Vettore<T>::Iteratore& Vettore<T>::Iteratore::operator++()
 {
     punt++;
@@ -302,7 +270,7 @@ typename Vettore<T>::Iteratore& Vettore<T>::Iteratore::operator--()
 template<class T>
 T* Vettore<T>::Iteratore::operator->() const
 {
-    return punt;
+    return *punt;
 }
 
 template<class T>
@@ -337,30 +305,6 @@ template<class T>
 bool Vettore<T>::ConstIteratore::operator==(const Vettore::ConstIteratore & cit) const
 {
     return punt == cit.punt;
-}
-
-template<class T>
-bool Vettore<T>::ConstIteratore::operator<(const Vettore::ConstIteratore & cit) const
-{
-    return punt < cit.punt;
-}
-
-template<class T>
-bool Vettore<T>::ConstIteratore::operator<=(const Vettore::ConstIteratore & cit) const
-{
-    return punt <= cit.punt;
-}
-
-template<class T>
-bool Vettore<T>::ConstIteratore::operator>(const Vettore::ConstIteratore & cit) const
-{
-    return punt > cit.punt;
-}
-
-template<class T>
-bool Vettore<T>::ConstIteratore::operator>=(const Vettore::ConstIteratore & cit) const
-{
-    return punt >= cit.punt;
 }
 
 template<class T>

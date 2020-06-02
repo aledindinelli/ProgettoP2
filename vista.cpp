@@ -10,22 +10,25 @@ Vista::Vista(Controller* c, QWidget *parent) : QMainWindow(parent), controller(c
     addMenu();
 
     QGroupBox *search = addSearch();
+    QGroupBox *lcd = addLCD();
     QGroupBox *persone = addPersoneBox();
     QGroupBox *dettagli = addDettagliBox();
 
     mainLayout->addWidget(search, 0, 0);
+    mainLayout->addWidget(lcd, 0, 1);
     mainLayout->addWidget(persone, 1, 0);
-    mainLayout->addWidget(dettagli, 0, 1, 2, 1);
+    mainLayout->addWidget(dettagli, 1, 1);
     mainLayout->setRowStretch(0,0);
     mainLayout->setRowStretch(1,1);
     mainLayout->setColumnStretch(1, 1);
-    mainLayout->setColumnMinimumWidth(0, 500);
-    mainLayout->setColumnMinimumWidth(1, 200);
-    mainLayout->setRowMinimumHeight(1, 150);
+    mainLayout->setColumnMinimumWidth(0, 350);
+    mainLayout->setColumnMinimumWidth(1, 225);
+    mainLayout->setRowMinimumHeight(0, 70);
+    mainLayout->setRowMinimumHeight(1, 200);
 
     central->setLayout(mainLayout);
     setCentralWidget(central);
-    resize(850, 400);
+    resize(750, 450);
 }
 
 void Vista::guida()
@@ -68,10 +71,10 @@ void Vista::addMenu()
 QGroupBox *Vista::addSearch()
 {
     QLineEdit *searchbox = new QLineEdit();
-    searchbox->setPlaceholderText("Inserisci il nome della persona che cerchi");
+    searchbox->setPlaceholderText("Inserisci qui il nome della persona che cerchi");
     searchbox->setClearButtonEnabled(true);
 
-    QGroupBox *box = new QGroupBox(tr("Cerca"));
+    QGroupBox *box = new QGroupBox(tr("Cerca:"));
     QGridLayout *layout = new QGridLayout;
     layout->addWidget(searchbox, 0, 0);
     box->setLayout(layout);
@@ -79,9 +82,23 @@ QGroupBox *Vista::addSearch()
     return box;
 }
 
+QGroupBox *Vista::addLCD()
+{
+    QLCDNumber *lcd = new QLCDNumber(9);
+    lcd->setSegmentStyle(QLCDNumber::Flat);
+    lcd->display(-3585.85);
+
+    QGroupBox *box = new QGroupBox(tr("Bilancio:"));
+    QGridLayout *layout = new QGridLayout;
+    layout->addWidget(lcd, 0, 0);
+    box->setLayout(layout);
+
+    return box;
+}
+
 QGroupBox *Vista::addPersoneBox()
 {
-    QGroupBox *box = new QGroupBox(tr("Persone"));
+    QGroupBox *box = new QGroupBox(tr("Persone:"));
 
 
 
@@ -90,7 +107,7 @@ QGroupBox *Vista::addPersoneBox()
 
 QGroupBox *Vista::addDettagliBox()
 {
-    QGroupBox *box = new QGroupBox(tr("Dettagli"));
+    QGroupBox *box = new QGroupBox(tr("Dettagli:"));
 
     return box;
 }

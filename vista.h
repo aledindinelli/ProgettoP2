@@ -11,6 +11,7 @@
 #include <QMenuBar>
 #include <QLineEdit>
 #include <QMessageBox>
+#include <QLCDNumber>
 
 class Controller;
 
@@ -30,6 +31,7 @@ private:
 
     void addMenu();
     QGroupBox *addSearch();
+    QGroupBox *addLCD();
     QGroupBox *addPersoneBox();
     QGroupBox *addDettagliBox();
 

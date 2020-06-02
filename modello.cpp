@@ -27,11 +27,12 @@ void Modello::popolaVettore()
 //    vett.push_back(p7);
 }
 
-void Modello::leggiVettore(Vettore<Persona *> v)
+void Modello::leggiVettore(const Vettore<Persona *> & v)
 {
-//    Laureando *ptr;
-//    for (Vettore<Persona*>::Iteratore it = v.Begin(); it != v.End(); ++it)
+//    Laureando * ptr;
+//    for (Vettore<Persona*>::ConstIteratore cit = v.Begin(); cit != v.End(); ++cit)
 //    {
-//        ptr = dynamic_cast<Laureando *>()
+//        ptr = dynamic_cast<Laureando *>(cit->container[cit]);
+//        cout << ptr->nome << " " << ptr->eta << endl;
 //    }
 }
