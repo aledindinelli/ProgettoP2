@@ -29,10 +29,9 @@ void Modello::popolaVettore()
 
 void Modello::leggiVettore(const Vettore<Persona *> & v)
 {
-    Laureando * ptr;
     for (Vettore<Persona*>::ConstIteratore cit = v.citBegin(); cit != v.citEnd(); ++cit)
     {
-        ptr = dynamic_cast<Laureando *>(cit);
-        cout << cit.getNome() << " " << cit.getEta() << endl;
+        Laureando * ptr = dynamic_cast<Laureando *>(*cit);
+        cout << ptr->getNome() << " " << ptr->getEta() << endl;
     }
 }

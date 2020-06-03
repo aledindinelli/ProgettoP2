@@ -4,7 +4,7 @@
 template <class T>
 class Vettore {
 private:
-    T *container;
+    T * container;
     unsigned int _size;
     unsigned int _capacity;
 
@@ -33,7 +33,7 @@ public:
     class Iteratore {
         friend class Vettore;
     private:
-        T* punt;
+        T * punt;
     public:
         Iteratore();
         Iteratore(T*);
@@ -53,10 +53,10 @@ public:
     class ConstIteratore {
         friend class Vettore;
     private:
-        const T* punt;
+        const T * punt;
     public:
         ConstIteratore();
-        ConstIteratore(T*);
+        ConstIteratore(const T*);
         ConstIteratore(const ConstIteratore &);
         ~ConstIteratore();
 
@@ -124,8 +124,7 @@ Vettore<T>& Vettore<T>::operator=(const Vettore &v)
     container = new T[_size];
 
     for (unsigned int i=0; i<_size; i++) {
-        T *ptr = new T*(v.container[i]);
-        container[i] = ptr;
+        container[i] = v.container[i];
     }
 
     return *this;
@@ -189,28 +188,28 @@ T& Vettore<T>::operator[](unsigned int i) const
 template<class T>
 typename Vettore<T>::Iteratore Vettore<T>::itBegin() const
 {
-    Vettore<T>::Iteratore it(container[0]);
+    Vettore<T>::Iteratore it(container);
     return it;
 }
 
 template<class T>
 typename Vettore<T>::Iteratore Vettore<T>::itEnd() const
 {
-    Vettore<T>::Iteratore it(container[_size]);
+    Vettore<T>::Iteratore it(container + _size);
     return it;
 }
 
 template<class T>
 typename Vettore<T>::ConstIteratore Vettore<T>::citBegin() const
 {
-    Vettore<T>::ConstIteratore cit(container[0]);
+    Vettore<T>::ConstIteratore cit(container);
     return cit;
 }
 
 template<class T>
 typename Vettore<T>::ConstIteratore Vettore<T>::citEnd() const
 {
-    Vettore<T>::ConstIteratore cit(container[_size]);
+    Vettore<T>::ConstIteratore cit(container + _size);
     return cit;
 }
 
@@ -285,6 +284,9 @@ T& Vettore<T>::Iteratore::operator*() const
 
 template<class T>
 Vettore<T>::ConstIteratore::ConstIteratore() : punt(nullptr) {}
+
+template<class T>
+Vettore<T>::ConstIteratore::ConstIteratore(const T * ptr) : punt(ptr) {}
 
 template<class T>
 Vettore<T>::ConstIteratore::ConstIteratore(const Vettore::ConstIteratore & cit) : punt(cit.punt) {}
