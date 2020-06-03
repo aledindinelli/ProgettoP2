@@ -15,9 +15,10 @@ using namespace std;
 class Modello
 {
 private:
-    Vettore<Persona*> vett;
+
 
 public:
+    Vettore<Persona*> vett;
     Modello();
 
     void resetVett();

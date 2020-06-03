@@ -12,6 +12,7 @@
 #include <QLineEdit>
 #include <QMessageBox>
 #include <QLCDNumber>
+#include <QPalette>
 
 class Controller;
 
