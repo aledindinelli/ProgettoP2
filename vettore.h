@@ -98,8 +98,7 @@ Vettore<T>::Vettore(const Vettore &v) : _size(v._size), _capacity(v._capacity)
 {
     container = new T[_size];
     for (unsigned int i=0; i<_size; i++) {
-        T *ptr = new T*(v.container[i]);
-        container[i] = ptr;
+        container[i] = new T(v.container[i]);
     }
 }
 
@@ -165,7 +164,7 @@ template<class T>
 void Vettore<T>::push_back(const T &t)
 {
     if (_size == _capacity) {
-        T *temp = new T[2*_capacity];
+        T * temp = new T[2*_capacity];
         for (unsigned int i = 0; i < _size; i++) {
             temp[i] = container[i];
         }
