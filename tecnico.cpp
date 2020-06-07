@@ -1,24 +1,15 @@
 #include "tecnico.h"
 
 Tecnico::Tecnico(std::string n, unsigned short e, unsigned short o, double p)
-    : Persona(n,e), Impiegato(n,e,o), pagaOraria(p) {}
+    : Persona(n,e), Impiegato(n,e,o,p) {}
 
-double Tecnico::getPagaOraria() const
-{
-    return pagaOraria;
-}
-
-void Tecnico::setPagaOraria(double p)
-{
-    pagaOraria = p;
-}
 
 double Tecnico::costo() const
 {
-    return getOreLavoro() * pagaOraria;
+    return getOreLavoro() * getPagaOraria();
 }
 
 void Tecnico::gestione()
 {
-    pagaOraria *= 1.15;
+    setPagaOraria(1.15);
 }

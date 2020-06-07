@@ -4,8 +4,13 @@ Modello::Modello() {}
 
 void Modello::resetVett()
 {
-    Vettore<Persona*> temp(0U);
+    Vettore<Persona *> temp(0U);
     vett = temp;
+}
+
+unsigned int Modello::getSize()
+{
+    return vett.getSize();
 }
 
 void Modello::popolaVettore()

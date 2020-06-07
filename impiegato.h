@@ -6,12 +6,15 @@
 class Impiegato : virtual public Persona
 {
 private:
+    double pagaOraria;
     unsigned short oreLavoro;
 
 public:
-    Impiegato(std::string, unsigned short, unsigned short);
+    Impiegato(std::string, unsigned short, unsigned short, double);
     virtual ~Impiegato() = default;
 
+    virtual double getPagaOraria() const;
+    virtual void setPagaOraria(double);
     virtual unsigned short getOreLavoro() const;
     virtual void setOreLavoro(unsigned short);
 };

@@ -15,14 +15,13 @@ using namespace std;
 class Modello
 {
 private:
-
+    Vettore<Persona *> vett;
 
 public:
-    Vettore<Persona*> vett;
     Modello();
 
     void resetVett();
-
+    unsigned int getSize();
     //per test
     void popolaVettore();
     void leggiVettore(const Vettore<Persona *> &);

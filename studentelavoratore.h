@@ -7,7 +7,6 @@
 class StudenteLavoratore : public Studente, Impiegato
 {
 private:
-    double pagaOraria;
 
 public:
     StudenteLavoratore(std::string, unsigned short, corsoLaurea, bool, unsigned short, unsigned short, double);

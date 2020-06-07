@@ -10,16 +10,19 @@ class Controller : public QObject
 {
     Q_OBJECT
 public:
-    explicit Controller(Modello*, QObject *parent = nullptr);
+    explicit Controller(Modello *, QObject * parent = nullptr);
 
-    void setView(Vista* v);
+    void setView(Vista * v);
+    DatiPersona getDatiPersona();
+    unsigned int getSize();
 
 public slots:
-    //void resetApp();
 
 private:
-    Vista* view;
-    Modello* model;
+
+    Vista * view;
+    Modello * model;
+
 };
 
 #endif // CONTROLLER_H

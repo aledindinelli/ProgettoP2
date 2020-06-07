@@ -15,7 +15,6 @@ public:
     Vettore(const Vettore<T> &);
 
     ~Vettore();
-
     Vettore & operator=(const Vettore<T> &);
 
     bool operator==(const Vettore<T> &) const;
@@ -36,9 +35,9 @@ public:
         T * punt;
     public:
         Iteratore();
-        Iteratore(T*);
+        Iteratore(T *);
         Iteratore(const Iteratore &);
-        ~Iteratore();
+        ~Iteratore() = default;
 
         bool operator!=(const Iteratore &) const;
         bool operator==(const Iteratore &) const;
@@ -56,9 +55,9 @@ public:
         const T * punt;
     public:
         ConstIteratore();
-        ConstIteratore(const T*);
+        ConstIteratore(const T *);
         ConstIteratore(const ConstIteratore &);
-        ~ConstIteratore();
+        ~ConstIteratore() = default;
 
         bool operator!=(const ConstIteratore &) const;
         bool operator==(const ConstIteratore &) const;
@@ -94,7 +93,7 @@ Vettore<T>::Vettore(T t, unsigned int s) : _size(s), _capacity(s)
 }
 
 template<class T>
-Vettore<T>::Vettore(const Vettore &v) : _size(v._size), _capacity(v._capacity)
+Vettore<T>::Vettore(const Vettore & v) : _size(v._size), _capacity(v._capacity)
 {
     container = new T[_size];
     for (unsigned int i=0; i<_size; i++) {
@@ -111,7 +110,7 @@ Vettore<T>::~Vettore()
 }
 
 template<class T>
-Vettore<T>& Vettore<T>::operator=(const Vettore &v)
+Vettore<T>& Vettore<T>::operator=(const Vettore & v)
 {
     if (this == &v) {
         return *this;
@@ -130,7 +129,7 @@ Vettore<T>& Vettore<T>::operator=(const Vettore &v)
 }
 
 template<class T>
-bool Vettore<T>::operator==(const Vettore &v) const
+bool Vettore<T>::operator==(const Vettore & v) const
 {
     if (_size != v._size || _capacity != v._capacity)
         return false;
@@ -143,7 +142,7 @@ bool Vettore<T>::operator==(const Vettore &v) const
 }
 
 template<class T>
-bool Vettore<T>::operator!=(const Vettore &v) const
+bool Vettore<T>::operator!=(const Vettore & v) const
 {
     return !(*this == v);
 }
@@ -161,10 +160,16 @@ unsigned int Vettore<T>::getSize() const
 }
 
 template<class T>
-void Vettore<T>::push_back(const T &t)
+void Vettore<T>::push_back(const T & t)
 {
-    if (_size == _capacity) {
-        T * temp = new T[2*_capacity];
+    if (_capacity == 0 || _size == _capacity) {
+        if (_capacity == 0) {
+            _capacity = 1;
+        }
+        else {
+            _capacity *= 2;
+        }
+        T * temp = new T[_capacity];
         for (unsigned int i = 0; i < _size; i++) {
             temp[i] = container[i];
         }
@@ -215,8 +220,8 @@ typename Vettore<T>::ConstIteratore Vettore<T>::citEnd() const
 template<class T>
 void Vettore<T>::erase(Vettore::Iteratore pos)
 {
-    for (Iteratore it = itBegin(); it != pos && it < itEnd(); it++) {
-        container[it] = container[it +1];
+    for (Iteratore it = itBegin(); it != pos && it != itEnd(); ++it) {
+        *it = *(++it);
     }
     _size--;
 }
@@ -232,14 +237,6 @@ Vettore<T>::Iteratore::Iteratore(T * ptr) : punt(ptr) {}
 
 template<class T>
 Vettore<T>::Iteratore::Iteratore(const Vettore::Iteratore & it) : punt(it.punt) {}
-
-template<class T>
-Vettore<T>::Iteratore::~Iteratore()
-{
-    if (this) {
-        delete this;
-    }
-}
 
 template<class T>
 bool Vettore<T>::Iteratore::operator!=(const Iteratore & it) const
@@ -289,14 +286,6 @@ Vettore<T>::ConstIteratore::ConstIteratore(const T * ptr) : punt(ptr) {}
 
 template<class T>
 Vettore<T>::ConstIteratore::ConstIteratore(const Vettore::ConstIteratore & cit) : punt(cit.punt) {}
-
-template<class T>
-Vettore<T>::ConstIteratore::~ConstIteratore()
-{
-    if (this) {
-        delete this;
-    }
-}
 
 template<class T>
 bool Vettore<T>::ConstIteratore::operator!=(const Vettore::ConstIteratore & cit) const
