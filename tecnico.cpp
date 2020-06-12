@@ -1,7 +1,7 @@
 #include "tecnico.h"
 
-Tecnico::Tecnico(std::string n, unsigned short e, unsigned short o, double p)
-    : Persona(n,e), Impiegato(n,e,o,p) {}
+Tecnico::Tecnico(std::string n, unsigned short e, unsigned short o, reparto s, double p)
+    : Persona(n,e), Impiegato(n,e,o,p), settore(s) {}
 
 
 double Tecnico::costo() const

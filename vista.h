@@ -5,6 +5,7 @@
 #include <QWidget>
 #include <QVBoxLayout>
 #include <QGridLayout>
+#include <QFormLayout>
 #include <QGroupBox>
 #include <QLabel>
 #include <QFrame>
@@ -15,6 +16,12 @@
 #include <QPalette>
 #include <QButtonGroup>
 #include <QPushButton>
+#include <QScrollArea>
+#include <QDialog>
+#include <QSpinBox>
+#include <QDoubleSpinBox>
+#include <QRadioButton>
+#include <QComboBox>
 
 class Controller;
 
@@ -27,6 +34,12 @@ public:
 
 private slots:
     void showGuida();
+    void addDocente();
+    void addDottorando();
+    void addLaureando();
+    void addStudLav();
+    void addTecnico();
+    void creaDocente(QString, unsigned int, double, unsigned int, bool);
 
 private:
     Controller * controller;
@@ -37,36 +50,6 @@ private:
     QGroupBox * addLCD();
     QGroupBox * addPersoneBox();
     QGroupBox * addDettagliBox();
-};
-
-enum tipo {errore = -1, docente = 0, dottorando = 1, laureando = 2, studentelavoratore = 3, tecnico = 4};
-enum corsoLau {inge = 0, inf = 1, psi = 2, eco = 3};
-
-struct DatiPersona
-{
-    tipo type;
-    //Persona
-    std::string nome;
-    unsigned short eta;
-    //Impiegato
-    double pagaOraria;
-    unsigned short oreLavoro;
-    //Docente
-    bool cattedra;
-    double bonusDocente;
-    //Tecnico
-    //Studente
-    corsoLau corso;
-    bool regolare;
-    double media;
-    //Dottorando
-    std::string ricerca;
-    //Laureando
-    unsigned short votoBase;
-    unsigned short bonusVoto;
-    //StudenteLavoratore
-
-    DatiPersona(tipo, std::string, unsigned short, double, unsigned short, bool, double, corsoLau, bool, double, std::string, unsigned short, unsigned short);
 };
 
 #endif // VISTA_H

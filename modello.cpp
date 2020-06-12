@@ -2,41 +2,44 @@
 
 Modello::Modello() {}
 
+std::string Modello::getNome(unsigned int i) const
+{
+    return vett[i]->getNome();
+}
+
+unsigned int Modello::getSize() const
+{
+    return vett.getSize();
+}
+
 void Modello::resetVett()
 {
     Vettore<Persona *> temp(0U);
     vett = temp;
 }
 
-unsigned int Modello::getSize()
+void Modello::insertDocente(std::string n, unsigned short e, double p, unsigned short o, bool c)
 {
-    return vett.getSize();
+    Docente * docente = new Docente(n, e, o, c, p);
+    vett.push_back(docente);
 }
 
-void Modello::popolaVettore()
+void Modello::insertDottorando(std::string n, unsigned short e, corsoLaurea c, bool reg, double m, std::string ric)
 {
-    Persona* p1 = new Laureando("Paolo Rossi", 30, ingegneria, false, 25, 90);
-    Persona* p2 = new Laureando("Paolo Rossi", 30, ingegneria, false, 25, 90);
-    Persona* p3 = new Laureando("Paolo Rossi", 30, ingegneria, false, 25, 90);
-    Persona* p4 = new Laureando("Paolo Rossi", 30, ingegneria, false, 25, 90);
-    Persona* p5 = new Laureando("Paolo Rossi", 30, ingegneria, false, 25, 90);
-    Persona* p6 = new Laureando("Paolo Rossi", 30, ingegneria, false, 25, 90);
-    Persona* p7 = new Laureando("Paolo Rossi", 30, ingegneria, false, 25, 90);
 
-    vett.push_back(p1);
-    vett.push_back(p2);
-    vett.push_back(p3);
-    vett.push_back(p4);
-    vett.push_back(p5);
-    vett.push_back(p6);
-    vett.push_back(p7);
 }
 
-void Modello::leggiVettore(const Vettore<Persona *> & v)
+void Modello::insertLaureando(std::string n, unsigned short e, corsoLaurea c, bool r, double m, unsigned short v)
 {
-    for (Vettore<Persona*>::ConstIteratore cit = v.citBegin(); cit != v.citEnd(); ++cit)
-    {
-        Laureando * ptr = dynamic_cast<Laureando *>(*cit);
-        cout << ptr->getNome() << " " << ptr->getEta() << endl;
-    }
+
+}
+
+void Modello::insertStudLav(std::string n, unsigned short e, double p, unsigned short o, corsoLaurea c, bool r, double m)
+{
+
+}
+
+void Modello::insertTecnico(std::string n, unsigned short e, double p, unsigned short o, reparto r)
+{
+
 }

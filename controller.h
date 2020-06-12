@@ -9,17 +9,20 @@
 class Controller : public QObject
 {
     Q_OBJECT
+
 public:
     explicit Controller(Modello *, QObject * parent = nullptr);
 
     void setView(Vista * v);
-    DatiPersona getDatiPersona();
+
+    QString getNomePersona(unsigned int i);
+
     unsigned int getSize();
 
 public slots:
+    void nuovoDocente(std::string, unsigned short, double, unsigned short, bool);
 
 private:
-
     Vista * view;
     Modello * model;
 

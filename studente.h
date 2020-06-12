@@ -11,7 +11,6 @@ private:
     corsoLaurea corso;
     bool regolare;
     double media;
-    // double ultimoVoto;
 
 public:
     Studente(std::string, unsigned short, corsoLaurea, bool, unsigned short);

@@ -105,6 +105,7 @@ template<class T>
 Vettore<T>::~Vettore()
 {
     delete[] container;
+    container = nullptr;
     _size = 0U;
     _capacity = 0U;
 }
