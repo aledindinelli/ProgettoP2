@@ -31,14 +31,13 @@ Dialog::Dialog(Controller * c, Vista * v, tipo t, QWidget * parent) : QDialog(pa
         cattedra->setLayout(box);
         layout->addRow("Cattedra:", cattedra);
 
-        QPushButton * crea = new QPushButton("Crea");
-        layout->addRow(crea);
-
-        // DA AGGIUNGERE ANCHE SUGLI ALTRI TIPI
-        connect(crea,SIGNAL(clicked()),this,SLOT(creaDocente()));
+        invio = new QPushButton("Crea");
+        layout->addRow(invio);
+        connect(invio,SIGNAL(clicked()),this,SLOT(creaDocente()));
 
         setLayout(layout);
     }
+
     if (t == dottorando)
     {
         corso = new QComboBox();
@@ -50,11 +49,11 @@ Dialog::Dialog(Controller * c, Vista * v, tipo t, QWidget * parent) : QDialog(pa
 
         QGroupBox * regolare = new QGroupBox();
         regSi = new QRadioButton(tr("&Si"));
-        QRadioButton * no = new QRadioButton(tr("N&o"));
+        regNo = new QRadioButton(tr("N&o"));
         regSi->setChecked(true);
         QHBoxLayout *box = new QHBoxLayout;
         box->addWidget(regSi);
-        box->addWidget(no);
+        box->addWidget(regNo);
         regolare->setLayout(box);
         layout->addRow("Regolare:", regolare);
 
@@ -65,8 +64,9 @@ Dialog::Dialog(Controller * c, Vista * v, tipo t, QWidget * parent) : QDialog(pa
         ricerca = new QLineEdit();
         layout->addRow("Ricerca:", ricerca);
 
-        QPushButton * crea = new QPushButton("Crea");
-        layout->addRow(crea);
+        invio = new QPushButton("Crea");
+        layout->addRow(invio);
+        connect(invio,SIGNAL(clicked()),this,SLOT(creaDottorando()));
 
         setLayout(layout);
     }
@@ -82,11 +82,11 @@ Dialog::Dialog(Controller * c, Vista * v, tipo t, QWidget * parent) : QDialog(pa
 
         QGroupBox * regolare = new QGroupBox();
         regSi = new QRadioButton(tr("&Si"));
-        QRadioButton * no = new QRadioButton(tr("N&o"));
+        regNo = new QRadioButton(tr("N&o"));
         regSi->setChecked(true);
         QHBoxLayout *box = new QHBoxLayout;
         box->addWidget(regSi);
-        box->addWidget(no);
+        box->addWidget(regNo);
         regolare->setLayout(box);
         layout->addRow("Regolare:", regolare);
 
@@ -98,11 +98,9 @@ Dialog::Dialog(Controller * c, Vista * v, tipo t, QWidget * parent) : QDialog(pa
         votoBase->setRange(60, 110);
         layout->addRow("Voto Base:", votoBase);
 
-        bonusVoto = new QSpinBox();
-        layout->addRow("Bonus Voto:", bonusVoto);
-
-        QPushButton * crea = new QPushButton("Crea");
-        layout->addRow(crea);
+        invio = new QPushButton("Crea");
+        layout->addRow(invio);
+        connect(invio,SIGNAL(clicked()),this,SLOT(creaLaureando()));
 
         setLayout(layout);
     }
@@ -125,11 +123,11 @@ Dialog::Dialog(Controller * c, Vista * v, tipo t, QWidget * parent) : QDialog(pa
 
         QGroupBox * regolare = new QGroupBox();
         regSi = new QRadioButton(tr("&Si"));
-        QRadioButton * no = new QRadioButton(tr("N&o"));
+        regNo = new QRadioButton(tr("N&o"));
         regSi->setChecked(true);
         QHBoxLayout *box = new QHBoxLayout;
         box->addWidget(regSi);
-        box->addWidget(no);
+        box->addWidget(regNo);
         regolare->setLayout(box);
         layout->addRow("Regolare:", regolare);
 
@@ -137,8 +135,9 @@ Dialog::Dialog(Controller * c, Vista * v, tipo t, QWidget * parent) : QDialog(pa
         media->setRange(0, 30);
         layout->addRow("Media:", media);
 
-        QPushButton * crea = new QPushButton("Crea");
-        layout->addRow(crea);
+        invio = new QPushButton("Crea");
+        layout->addRow(invio);
+        connect(invio,SIGNAL(clicked()),this,SLOT(creaStudLav()));
 
         setLayout(layout);
     }
@@ -158,8 +157,9 @@ Dialog::Dialog(Controller * c, Vista * v, tipo t, QWidget * parent) : QDialog(pa
         reparto->insertItem(2, "Ufficio");
         layout->addRow("Reparto:", reparto);
 
-        QPushButton * crea = new QPushButton("Crea");
-        layout->addRow(crea);
+        invio = new QPushButton("Crea");
+        layout->addRow(invio);
+        connect(invio,SIGNAL(clicked()),this,SLOT(creaTecnico()));
 
         setLayout(layout);
     }
@@ -174,6 +174,104 @@ void Dialog::creaDocente()
     bool c = false; if (cattSi->isChecked()) {c=true;}
 
     controller->nuovoDocente(name, e, p, o, c);
+
+    vista->aggiornaApp();
+    emit close();
+}
+
+void Dialog::creaDottorando()
+{
+    std::string name = nome->text().toStdString();
+    unsigned short e = eta->value();
+    double med = media->value();
+    std::string ric = ricerca->text().toStdString();
+
+    int indice = corso->currentIndex();
+    if (indice == 0) {
+        controller->nuovoDottorando(name, e, ingegneria, regSi->isChecked(), med, ric);
+    }
+    if (indice == 1) {
+        controller->nuovoDottorando(name, e, informatica, regSi->isChecked(), med, ric);
+    }
+    if (indice == 2) {
+        controller->nuovoDottorando(name, e, psicologia, regSi->isChecked(), med, ric);
+    }
+    if (indice == 3) {
+        controller->nuovoDottorando(name, e, economia, regSi->isChecked(), med, ric);
+    }
+
+    vista->aggiornaApp();
+    emit close();
+}
+
+void Dialog::creaLaureando()
+{
+    std::string name = nome->text().toStdString();
+    unsigned short e = eta->value();
+    double med = media->value();
+    unsigned short voto = votoBase->value();
+
+    int indice = corso->currentIndex();
+    if (indice == 0) {
+        controller->nuovoLaureando(name, e, ingegneria, regSi->isChecked(), med, voto);
+    }
+    if (indice == 1) {
+        controller->nuovoLaureando(name, e, informatica, regSi->isChecked(), med, voto);
+    }
+    if (indice == 2) {
+        controller->nuovoLaureando(name, e, psicologia, regSi->isChecked(), med, voto);
+    }
+    if (indice == 3) {
+        controller->nuovoLaureando(name, e, economia, regSi->isChecked(), med, voto);
+    }
+
+    vista->aggiornaApp();
+    emit close();
+}
+
+void Dialog::creaStudLav()
+{
+    std::string name = nome->text().toStdString();
+    unsigned short e = eta->value();
+    double med = media->value();
+    double p = paga->value();
+    unsigned short o = ore->value();
+
+    int indice = corso->currentIndex();
+    if (indice == 0) {
+        controller->nuovoStudLav(name, e, ingegneria, regSi->isChecked(), med, o, p);
+    }
+    if (indice == 1) {
+        controller->nuovoStudLav(name, e, informatica, regSi->isChecked(), med, o, p);
+    }
+    if (indice == 2) {
+        controller->nuovoStudLav(name, e, psicologia, regSi->isChecked(), med, o, p);
+    }
+    if (indice == 3) {
+        controller->nuovoStudLav(name, e, economia, regSi->isChecked(), med, o, p);
+    }
+
+    vista->aggiornaApp();
+    emit close();
+}
+
+void Dialog::creaTecnico()
+{
+    std::string name = nome->text().toStdString();
+    unsigned short e = eta->value();
+    double p = paga->value();
+    unsigned short o = ore->value();
+
+    int indice = reparto->currentIndex();
+    if (indice == 0) {
+        controller->nuovoTecnico(name, e, p, o, server);
+    }
+    if (indice == 1) {
+        controller->nuovoTecnico(name, e, p, o, laboratorio);
+    }
+    if (indice == 2) {
+        controller->nuovoTecnico(name, e, p, o, ufficio);
+    }
 
     vista->aggiornaApp();
     emit close();

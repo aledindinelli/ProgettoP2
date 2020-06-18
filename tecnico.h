@@ -14,6 +14,9 @@ public:
     Tecnico(std::string, unsigned short, unsigned short, reparto, double p = 15);
     virtual ~Tecnico() = default;
 
+    reparto getReparto() const;
+    void setReparto(reparto);
+
     virtual double costo() const;
     virtual void gestione();
 };

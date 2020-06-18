@@ -25,8 +25,6 @@ public:
 
     void push_back(const T &);
 
-    // void pop_back();
-
     T& operator[](unsigned int) const;
 
     class Iteratore {

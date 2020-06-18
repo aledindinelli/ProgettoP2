@@ -39,6 +39,7 @@ public:
 private slots:
     void showGuida();
     void resetApp();
+    void eliminaPersona();
 
     void dettagliDocente();
     void dettagliDottorando();
@@ -51,6 +52,14 @@ private slots:
     void addLaureando();
     void addStudLav();
     void addTecnico();
+
+    void modificaDocente();
+    void modificaDottorando();
+    void modificaLaureando();
+    void modificaStudLav();
+    void modificaTecnico();
+
+    void modifyDocente();
 
 private:
     Controller * controller;
@@ -65,6 +74,10 @@ private:
     void addLCD();
     void addPersoneBox();
     void addDettagliBox();
+
+    void dettagliPersona(unsigned short, QVBoxLayout *);
+    void dettagliImpiegato(unsigned short, QVBoxLayout *);
+    void dettagliStudente(unsigned short, QVBoxLayout *);
 };
 
 #endif // VISTA_H

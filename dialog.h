@@ -32,8 +32,14 @@ class Dialog : public QDialog
 {
     Q_OBJECT
 
+    friend Vista;
+
 private slots:
     void creaDocente();
+    void creaDottorando();
+    void creaLaureando();
+    void creaStudLav();
+    void creaTecnico();
 
 private:
     Controller * controller;
@@ -47,11 +53,13 @@ private:
     QRadioButton * cattSi;
     QComboBox * corso;
     QRadioButton * regSi;
+    QRadioButton * regNo;
     QDoubleSpinBox * media;
     QLineEdit * ricerca;
     QSpinBox * votoBase;
     QSpinBox * bonusVoto;
     QComboBox * reparto;
+    QPushButton * invio;
 
 public:
     Dialog(Controller *, Vista *, tipo, QWidget * parent = nullptr);

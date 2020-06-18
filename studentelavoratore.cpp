@@ -1,6 +1,6 @@
 #include "studentelavoratore.h"
 
-StudenteLavoratore::StudenteLavoratore(std::string n, unsigned short e, corsoLaurea c, bool r, unsigned short m, unsigned short o, double p)
+StudenteLavoratore::StudenteLavoratore(std::string n, unsigned short e, corsoLaurea c, bool r, double m, unsigned short o, double p)
     : Persona(n,e), Studente(n,e,c,r,m), Impiegato(n,e,o,p) {}
 
 unsigned short StudenteLavoratore::tasse() const

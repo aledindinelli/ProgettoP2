@@ -9,7 +9,7 @@ class StudenteLavoratore : public Studente, Impiegato
 private:
 
 public:
-    StudenteLavoratore(std::string, unsigned short, corsoLaurea, bool, unsigned short, unsigned short, double);
+    StudenteLavoratore(std::string, unsigned short, corsoLaurea, bool, double, unsigned short, double);
     virtual ~StudenteLavoratore() = default;
 
     virtual unsigned short tasse() const;
