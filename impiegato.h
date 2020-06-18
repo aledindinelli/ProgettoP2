@@ -6,8 +6,8 @@
 class Impiegato : virtual public Persona
 {
 private:
-    double pagaOraria;
     unsigned short oreLavoro;
+    double pagaOraria;
 
 public:
     Impiegato(std::string, unsigned short, unsigned short, double);

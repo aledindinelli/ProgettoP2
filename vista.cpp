@@ -10,10 +10,10 @@ Vista::Vista(Controller * c, QWidget *parent) : QMainWindow(parent), controller(
 
     addMenu();
 
-    QGroupBox * search = addSearch();
-    QGroupBox * lcd = addLCD();
-    QGroupBox * persone = addPersoneBox();
-    QGroupBox * dettagli = addDettagliBox();
+    addSearch();
+    addLCD();
+    addPersoneBox();
+    addDettagliBox();
 
     mainLayout->addWidget(search, 0, 0);
     mainLayout->addWidget(lcd, 0, 1);
@@ -32,218 +32,129 @@ Vista::Vista(Controller * c, QWidget *parent) : QMainWindow(parent), controller(
     setMinimumSize(400, 400);
 }
 
+void Vista::aggiornaApp()
+{
+    delete lcd;
+    delete persone;
+    delete dettagli;
+
+    QWidget * central = new QWidget(this);
+    mainLayout = new QGridLayout(central);
+
+    addMenu();
+
+    addLCD();
+    addPersoneBox();
+    addDettagliBox();
+
+    mainLayout->addWidget(search, 0, 0);
+    mainLayout->addWidget(lcd, 0, 1);
+    mainLayout->addWidget(persone, 1, 0);
+    mainLayout->addWidget(dettagli, 1, 1);
+    mainLayout->setRowStretch(0,0);
+    mainLayout->setRowStretch(1,1);
+    mainLayout->setColumnStretch(1, 1);
+    mainLayout->setColumnMinimumWidth(0, 300);
+    mainLayout->setColumnMinimumWidth(1, 300);
+    mainLayout->setRowMinimumHeight(0, 70);
+    mainLayout->setRowMinimumHeight(1, 200);
+
+    central->setLayout(mainLayout);
+    setCentralWidget(central);
+}
+
 void Vista::showGuida()
 {
     QMessageBox::about(this, tr("NOME APPLICAZIONE"),  // cambiare titolo
                        tr("<p>Questa applicazione è pensata per.....</p>"));  // mettere guida
 }
 
+void Vista::resetApp()
+{
+    controller->resetVettore();
+
+    aggiornaApp();
+}
+
+void Vista::dettagliDocente()
+{
+    delete dettagli;
+    dettagli = new QGroupBox(tr("Dettagli Docente:"));
+    mainLayout->addWidget(dettagli, 1, 1);
+
+//    QScrollArea * scrollArea = new QScrollArea();
+//    scrollArea->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
+//    scrollArea->setWidgetResizable(true);
+//    scrollArea->setGeometry(10, 10, 100, 100);
+//    QWidget *widget = new QWidget();
+//    scrollArea->setWidget(widget);
+//    QVBoxLayout * lista = new QVBoxLayout();
+//    widget->setLayout(lista);
+
+//    Bottone * bottone = qobject_cast<Bottone *>(sender());
+//    unsigned short i = bottone->getIndice();
+
+//    QLabel * nome = new QLabel ("Ciao");
+//    lista->addWidget(nome);
+
+//    QGridLayout * layout = new QGridLayout;
+//    layout->addWidget(scrollArea, 0, 0);
+//    dettagli->setLayout(layout);
+}
+
+void Vista::dettagliDottorando()
+{
+
+}
+
+void Vista::dettagliLaureando()
+{
+
+}
+
+void Vista::dettagliStudLav()
+{
+
+}
+
+void Vista::dettagliTecnico()
+{
+
+}
+
 void Vista::addDocente()
 {
-    QDialog * finestra = new QDialog();
-    QFormLayout * layout = new QFormLayout();
+    Dialog * finestra = new Dialog(controller, this, docente);
 
-    QLineEdit * nome = new QLineEdit();
-    layout->addRow("Nome:", nome);
-
-    QSpinBox * eta = new QSpinBox();
-    layout->addRow("Età:", eta);
-
-    QDoubleSpinBox * paga = new QDoubleSpinBox();
-    paga->setRange(0, 9999);
-    layout->addRow("Paga Oraria:", paga);
-
-    QSpinBox * ore = new QSpinBox();
-    layout->addRow("Ore Lavoro:", ore);
-
-    QGroupBox * cattedra = new QGroupBox();
-    QRadioButton * si = new QRadioButton(tr("&Si"));
-    QRadioButton * no = new QRadioButton(tr("N&o"));
-    si->setChecked(true);
-    QHBoxLayout *box = new QHBoxLayout;
-    box->addWidget(si);
-    box->addWidget(no);
-    cattedra->setLayout(box);
-    layout->addRow("Cattedra:", cattedra);
-
-    QHBoxLayout * hbox = new QHBoxLayout();
-    QPushButton * annulla = new QPushButton("Annulla");
-    QPushButton * crea = new QPushButton("Crea");
-    hbox->addWidget(annulla);
-    hbox->addWidget(crea);
-    layout->addItem(hbox);
-
-    connect(annulla,SIGNAL(clicked()),this,SLOT(close())); //correggere close()
-
-    QString n = nome->text();
-    unsigned int e = eta->value();
-    double p = paga->value();
-    unsigned int o = ore->value();
-    bool c = false; if (si->isChecked()) {c=true;}
-
-    connect(crea,SIGNAL(clicked()),this,SLOT(creaDocente(n, e, p, o, c)));
-
-    finestra->setLayout(layout);
     finestra->exec();
 }
 
 void Vista::addDottorando()
 {
-    QDialog * finestra = new QDialog();
-    QFormLayout * layout = new QFormLayout();
+    Dialog * finestra = new Dialog(controller,  this, dottorando);
 
-    QLineEdit * nome = new QLineEdit();
-    layout->addRow("Nome:", nome);
-
-    QSpinBox * eta = new QSpinBox();
-    layout->addRow("Età:", eta);
-
-    QComboBox * corso = new QComboBox();
-    corso->insertItem(0, "Ingegneria");
-    corso->insertItem(1, "Informatica");
-    corso->insertItem(2, "Psicologia");
-    corso->insertItem(3, "Economia");
-    layout->addRow("Corso:", corso);
-
-    QGroupBox * regolare = new QGroupBox();
-    QRadioButton * si = new QRadioButton(tr("&Si"));
-    QRadioButton * no = new QRadioButton(tr("N&o"));
-    si->setChecked(true);
-    QHBoxLayout *box = new QHBoxLayout;
-    box->addWidget(si);
-    box->addWidget(no);
-    regolare->setLayout(box);
-    layout->addRow("Regolare:", regolare);
-
-    QDoubleSpinBox * media = new QDoubleSpinBox();
-    media->setRange(0, 30);
-    layout->addRow("Media:", media);
-
-    QLineEdit * ricerca = new QLineEdit();
-    layout->addRow("Ricerca:", ricerca);
-
-    finestra->setLayout(layout);
     finestra->exec();
 }
 
 void Vista::addLaureando()
 {
-    QDialog * finestra = new QDialog();
-    QFormLayout * layout = new QFormLayout();
+    Dialog * finestra = new Dialog(controller,  this, laureando);
 
-    QLineEdit * nome = new QLineEdit();
-    layout->addRow("Nome:", nome);
-
-    QSpinBox * eta = new QSpinBox();
-    layout->addRow("Età:", eta);
-
-    QComboBox * corso = new QComboBox();
-    corso->insertItem(0, "Ingegneria");
-    corso->insertItem(1, "Informatica");
-    corso->insertItem(2, "Psicologia");
-    corso->insertItem(3, "Economia");
-    layout->addRow("Corso:", corso);
-
-    QGroupBox * regolare = new QGroupBox();
-    QRadioButton * si = new QRadioButton(tr("&Si"));
-    QRadioButton * no = new QRadioButton(tr("N&o"));
-    si->setChecked(true);
-    QHBoxLayout *box = new QHBoxLayout;
-    box->addWidget(si);
-    box->addWidget(no);
-    regolare->setLayout(box);
-    layout->addRow("Regolare:", regolare);
-
-    QDoubleSpinBox * media = new QDoubleSpinBox();
-    media->setRange(0, 30);
-    layout->addRow("Media:", media);
-
-    QSpinBox * votoBase = new QSpinBox();
-    votoBase->setRange(60, 110);
-    layout->addRow("Voto Base:", votoBase);
-
-    QSpinBox * bonusVoto = new QSpinBox();
-    layout->addRow("Bonus Voto:", bonusVoto);
-
-    finestra->setLayout(layout);
     finestra->exec();
 }
 
 void Vista::addStudLav()
 {
-    QDialog * finestra = new QDialog();
-    QFormLayout * layout = new QFormLayout();
+    Dialog * finestra = new Dialog(controller,  this, studlavoratore);
 
-    QLineEdit * nome = new QLineEdit();
-    layout->addRow("Nome:", nome);
-
-    QSpinBox * eta = new QSpinBox();
-    layout->addRow("Età:", eta);
-
-    QDoubleSpinBox * paga = new QDoubleSpinBox();
-    paga->setRange(0, 9999);
-    layout->addRow("Paga Oraria:", paga);
-
-    QSpinBox * ore = new QSpinBox();
-    layout->addRow("Ore Lavoro:", ore);
-
-    QComboBox * corso = new QComboBox();
-    corso->insertItem(0, "Ingegneria");
-    corso->insertItem(1, "Informatica");
-    corso->insertItem(2, "Psicologia");
-    corso->insertItem(3, "Economia");
-    layout->addRow("Corso:", corso);
-
-    QGroupBox * regolare = new QGroupBox();
-    QRadioButton * si = new QRadioButton(tr("&Si"));
-    QRadioButton * no = new QRadioButton(tr("N&o"));
-    si->setChecked(true);
-    QHBoxLayout *box = new QHBoxLayout;
-    box->addWidget(si);
-    box->addWidget(no);
-    regolare->setLayout(box);
-    layout->addRow("Regolare:", regolare);
-
-    QDoubleSpinBox * media = new QDoubleSpinBox();
-    media->setRange(0, 30);
-    layout->addRow("Media:", media);
-
-    finestra->setLayout(layout);
     finestra->exec();
 }
 
 void Vista::addTecnico()
 {
-    QDialog * finestra = new QDialog();
-    QFormLayout * layout = new QFormLayout();
+    Dialog * finestra = new Dialog(controller,  this, tecnico);
 
-    QLineEdit * nome = new QLineEdit();
-    layout->addRow("Nome:", nome);
-
-    QSpinBox * eta = new QSpinBox();
-    layout->addRow("Età:", eta);
-
-    QDoubleSpinBox * paga = new QDoubleSpinBox();
-    paga->setRange(0, 9999);
-    layout->addRow("Paga Oraria:", paga);
-
-    QSpinBox * ore = new QSpinBox();
-    layout->addRow("Ore Lavoro:", ore);
-
-    QComboBox * reparto = new QComboBox();
-    reparto->insertItem(0, "Server");
-    reparto->insertItem(1, "Laboratorio");
-    reparto->insertItem(2, "Ufficio");
-    layout->addRow("Reparto:", reparto);
-
-    finestra->setLayout(layout);
     finestra->exec();
-}
-
-void Vista::creaDocente(QString n, unsigned int e, double p, unsigned int o, bool c)
-{
-    std::string nome = n.toStdString();
-    controller->nuovoDocente(nome, e, p, o, c);
 }
 
 void Vista::addMenu()
@@ -255,7 +166,7 @@ void Vista::addMenu()
 
     QAction * reset = fileMenu->addAction("Reset");
     QAction * esci = fileMenu->addAction("Esci");
-    //connect reset
+    connect(reset,SIGNAL(triggered()),this,SLOT(resetApp()));
     connect(esci,SIGNAL(triggered()),this,SLOT(close()));
 
     QAction * docente = nuovo->addAction("Docente");
@@ -280,40 +191,39 @@ void Vista::addMenu()
     mainLayout->setMenuBar(menubar);
 }
 
-QGroupBox * Vista::addSearch()
+void Vista::addSearch()
 {
-    QLineEdit * searchbox = new QLineEdit();
-    searchbox->setPlaceholderText("Inserisci qui il nome della persona che cerchi");
-    searchbox->setClearButtonEnabled(true);
+    search = new QGroupBox(tr("Cerca:"));
 
-    QGroupBox * box = new QGroupBox(tr("Cerca:"));
+    QLineEdit * cerca = new QLineEdit();
+    cerca->setPlaceholderText("Inserisci qui il nome della persona che cerchi");
+    cerca->setClearButtonEnabled(true);
+
     QGridLayout * layout = new QGridLayout;
-    layout->addWidget(searchbox, 0, 0);
-    box->setLayout(layout);
-
-    return box;
+    layout->addWidget(cerca, 0, 0);
+    search->setLayout(layout);
 }
 
-QGroupBox * Vista::addLCD()
+void Vista::addLCD()
 {
-    QLCDNumber * lcd = new QLCDNumber(9);
-    lcd->setSegmentStyle(QLCDNumber::Flat);
-    lcd->display(0000.00);
+    lcd = new QGroupBox(tr("Totale:"));
 
-    QGroupBox * box = new QGroupBox(tr("Totale:"));
+    QLCDNumber * screen = new QLCDNumber(9);
+    screen->setSegmentStyle(QLCDNumber::Flat);
+    short int costo = controller->getCosto();
+    screen->display(costo);
+
     QGridLayout * layout = new QGridLayout;
-    layout->addWidget(lcd, 0, 0);
-    box->setLayout(layout);
-
-    return box;
+    layout->addWidget(screen, 0, 0);
+    lcd->setLayout(layout);
 }
 
-QGroupBox * Vista::addPersoneBox()
+void Vista::addPersoneBox()
 {
-    QGroupBox * box = new QGroupBox(tr("Persone:"));
+    persone = new QGroupBox(tr("Persone:"));
 
-    QScrollArea * scrollArea = new QScrollArea(box);
-    scrollArea->setVerticalScrollBarPolicy( Qt::ScrollBarAlwaysOn );
+    QScrollArea * scrollArea = new QScrollArea();
+    scrollArea->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
     scrollArea->setWidgetResizable(true);
     scrollArea->setGeometry(10, 10, 100, 100);
 
@@ -323,22 +233,27 @@ QGroupBox * Vista::addPersoneBox()
     QVBoxLayout * lista = new QVBoxLayout();
     widget->setLayout(lista);
 
-    for (unsigned int i = 0; i < controller->getSize(); i++) {
+    for (unsigned short i = 0; i < controller->getSize(); i++) {
         QString nome = controller->getNomePersona(i);
-        QPushButton * bottone = new QPushButton(nome);
+        tipo t = controller->getTipoPersona(i);
+        Bottone * bottone = new Bottone(i, t);
+        switch (t) {
+            case docente: connect(bottone,SIGNAL(clicked()),this,SLOT(dettagliDocente()));
+//            case dottorando: connect(bottone,SIGNAL(clicked()),this,SLOT(dettagliDottorando()));
+//            case laureando: connect(bottone,SIGNAL(clicked()),this,SLOT(dettagliLaureando()));
+//            case studlavoratore: connect(bottone,SIGNAL(clicked()),this,SLOT(dettagliStudLav()));
+//            case tecnico: connect(bottone,SIGNAL(clicked()),this,SLOT(dettagliTecnico()));
+        }
+        bottone->setText(nome);
         lista->addWidget(bottone);
     }
 
     QGridLayout * layout = new QGridLayout;
-    layout->addWidget(scrollArea);
-    box->setLayout(layout);
-
-    return box;
+    layout->addWidget(scrollArea, 0, 0);
+    persone->setLayout(layout);
 }
 
-QGroupBox * Vista::addDettagliBox()
+void Vista::addDettagliBox()
 {
-    QGroupBox *box = new QGroupBox(tr("Dettagli:"));
-
-    return box;
+    dettagli = new QGroupBox(tr("Dettagli:"));
 }

@@ -15,8 +15,9 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
-SOURCES += \
+SOURCES += bottone.cpp \
     controller.cpp \
+    dialog.cpp \
     docente.cpp \
     dottorando.cpp \
     impiegato.cpp \
@@ -29,8 +30,9 @@ SOURCES += \
     tecnico.cpp \
     vista.cpp
 
-HEADERS += \
+HEADERS += bottone.h \
     controller.h \
+    dialog.h \
     docente.h \
     dottorando.h \
     impiegato.h \
@@ -40,6 +42,7 @@ HEADERS += \
     studente.h \
     studentelavoratore.h \
     tecnico.h \
+    tipo.h \
     vettore.h \
     vista.h
 

@@ -1,19 +1,22 @@
 #ifndef VISTA_H
 #define VISTA_H
 
+#include "dialog.h"
+#include "bottone.h"
+#include "tipo.h"
+
 #include <QMainWindow>
 #include <QWidget>
+#include <QHBoxLayout>
 #include <QVBoxLayout>
 #include <QGridLayout>
 #include <QFormLayout>
 #include <QGroupBox>
 #include <QLabel>
-#include <QFrame>
 #include <QMenuBar>
 #include <QLineEdit>
 #include <QMessageBox>
 #include <QLCDNumber>
-#include <QPalette>
 #include <QButtonGroup>
 #include <QPushButton>
 #include <QScrollArea>
@@ -31,25 +34,37 @@ class Vista : public QMainWindow
 
 public:
     Vista(Controller *, QWidget *parent = nullptr);
+    void aggiornaApp();
 
 private slots:
     void showGuida();
+    void resetApp();
+
+    void dettagliDocente();
+    void dettagliDottorando();
+    void dettagliLaureando();
+    void dettagliStudLav();
+    void dettagliTecnico();
+
     void addDocente();
     void addDottorando();
     void addLaureando();
     void addStudLav();
     void addTecnico();
-    void creaDocente(QString, unsigned int, double, unsigned int, bool);
 
 private:
     Controller * controller;
     QGridLayout * mainLayout;
+    QGroupBox * search;
+    QGroupBox * lcd;
+    QGroupBox * persone;
+    QGroupBox * dettagli;
 
     void addMenu();
-    QGroupBox * addSearch();
-    QGroupBox * addLCD();
-    QGroupBox * addPersoneBox();
-    QGroupBox * addDettagliBox();
+    void addSearch();
+    void addLCD();
+    void addPersoneBox();
+    void addDettagliBox();
 };
 
 #endif // VISTA_H

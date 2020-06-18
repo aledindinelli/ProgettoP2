@@ -15,9 +15,10 @@ private:
 
 public:
     Modello();
-
     unsigned int getSize() const;
-    std::string getNome(unsigned int) const;
+
+    Persona * getPersona(unsigned int) const;
+    double getCostoTotale() const;
 
     void resetVett();
 
@@ -28,7 +29,7 @@ public:
     void insertTecnico(std::string, unsigned short, double, unsigned short, reparto);
 
     //funzioni per test
-    void popolaVettore()
+    void popolaVettore() // DA METTERE NEL CPP PER RANZATO
     {
         Persona* p1 = new Laureando("Paolo Rossi", 30, ingegneria, false, 25, 90);
         Persona* p2 = new Laureando("Paolo Rossi", 30, ingegneria, false, 25, 90);

@@ -5,6 +5,7 @@
 
 #include "vista.h"
 #include "modello.h"
+#include "tipo.h"
 
 class Controller : public QObject
 {
@@ -15,17 +16,19 @@ public:
 
     void setView(Vista * v);
 
-    QString getNomePersona(unsigned int i);
+    unsigned int getSize() const;
+    double getCosto() const;
 
-    unsigned int getSize();
+    QString getNomePersona(unsigned int i) const;
+    tipo getTipoPersona(unsigned int i) const;
 
-public slots:
     void nuovoDocente(std::string, unsigned short, double, unsigned short, bool);
+
+    void resetVettore();
 
 private:
     Vista * view;
     Modello * model;
-
 };
 
 #endif // CONTROLLER_H
