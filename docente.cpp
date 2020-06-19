@@ -15,13 +15,18 @@ void Docente::setCattedra(bool c)
     cattedra = c;
 }
 
-double Docente::costo() const
+double Docente::salario() const
 {
-    return getOreLavoro() * getPagaOraria() + cattedra * bonusDocente;
+    return Impiegato::salario() + cattedra * bonusDocente;
 }
 
-void Docente::gestione()
+double Docente::costo() const
+{
+    return salario() + (getOreLavoro() > 20 ? 100 : 0);
+}
+
+void Docente::migliora()
 {
     cattedra = true;
-    setPagaOraria(1.15);
+    setPagaOraria(getPagaOraria() * 1.5);
 }

@@ -24,6 +24,7 @@ public:
 
     void resetVett();
     void togliPersona(unsigned short);
+    void miglioraPersona(unsigned short);
 
     void insertDocente(std::string, unsigned short, double, unsigned short, bool);
     void insertDottorando(std::string, unsigned short, corsoLaurea, bool, double, std::string);
@@ -32,6 +33,10 @@ public:
     void insertTecnico(std::string, unsigned short, double, unsigned short, reparto);
 
     void modifyDocente(std::string, unsigned short, double, unsigned short, bool, unsigned short);
+    void modifyDottorando(std::string, unsigned short, corsoLaurea, bool, double, std::string, unsigned short);
+    void modifyLaureando(std::string, unsigned short, corsoLaurea, bool, double, unsigned short, unsigned short);
+    void modifyStudLav(std::string, unsigned short, double, unsigned short, corsoLaurea, bool, double, unsigned short);
+    void modifyTecnico(std::string, unsigned short, double, unsigned short, reparto, unsigned short);
 };
 
 #endif // MODELLO_H

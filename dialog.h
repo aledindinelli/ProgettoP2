@@ -7,17 +7,10 @@
 //togliere roba inutile
 #include <QMainWindow>
 #include <QWidget>
-#include <QHBoxLayout>
-#include <QVBoxLayout>
-#include <QGridLayout>
 #include <QFormLayout>
 #include <QGroupBox>
 #include <QLabel>
-#include <QMenuBar>
 #include <QLineEdit>
-#include <QMessageBox>
-#include <QLCDNumber>
-#include <QButtonGroup>
 #include <QPushButton>
 #include <QScrollArea>
 #include <QDialog>
@@ -42,9 +35,16 @@ private slots:
     void creaStudLav();
     void creaTecnico();
 
+    void modificaDocente();
+    void modificaDottorando();
+    void modificaLaureando();
+    void modificaStudLav();
+    void modificaTecnico();
+
 private:
     Controller * controller;
     Vista * vista;
+    short int indicePersona;
 
     QFormLayout * layout;
     QLineEdit * nome;
@@ -64,7 +64,7 @@ private:
     Bottone * invio;
 
 public:
-    Dialog(Controller *, Vista *, tipo, QWidget * parent = nullptr);
+    Dialog(Controller *, Vista *, tipo, short int, QWidget * parent = nullptr);
 };
 
 #endif // DIALOG_H

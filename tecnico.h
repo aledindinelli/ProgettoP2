@@ -17,8 +17,9 @@ public:
     reparto getReparto() const;
     void setReparto(reparto);
 
+    virtual double salario() const;
     virtual double costo() const;
-    virtual void gestione();
+    virtual void migliora();
 };
 
 #endif // TECNICO_H

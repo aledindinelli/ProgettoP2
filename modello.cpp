@@ -7,7 +7,7 @@ unsigned int Modello::getSize() const
     return vett.getSize();
 }
 
-Persona *Modello::getPersona(unsigned int i) const
+Persona * Modello::getPersona(unsigned int i) const
 {
     return vett[i];
 }
@@ -33,13 +33,6 @@ void Modello::popolaVettore()
 //    Persona* p8 = new Laureando("Paolo Rossi", 30, ingegneria, false, 25, 90);
 //    Persona* p9 = new Laureando("Paolo Rossi", 30, ingegneria, false, 25, 90);
 //    Persona* p10 = new Laureando("Paolo Rossi", 30, ingegneria, false, 25, 90);
-//    Persona* p11 = new Laureando("Paolo Rossi", 30, ingegneria, false, 25, 90);
-//    Persona* p12 = new Laureando("Paolo Rossi", 30, ingegneria, false, 25, 90);
-//    Persona* p13 = new Laureando("Paolo Rossi", 30, ingegneria, false, 25, 90);
-//    Persona* p14 = new Laureando("Paolo Rossi", 30, ingegneria, false, 25, 90);
-//    Persona* p15 = new Laureando("Paolo Rossi", 30, ingegneria, false, 25, 90);
-//    Persona* p16 = new Laureando("Paolo Rossi", 30, ingegneria, false, 25, 90);
-//    Persona* p17 = new Laureando("Paolo Rossi", 30, ingegneria, false, 25, 90);
 
 //    vett.push_back(p1);
 //    vett.push_back(p2);
@@ -51,13 +44,6 @@ void Modello::popolaVettore()
 //    vett.push_back(p8);
 //    vett.push_back(p9);
 //    vett.push_back(p10);
-//    vett.push_back(p11);
-//    vett.push_back(p12);
-//    vett.push_back(p13);
-//    vett.push_back(p14);
-//    vett.push_back(p15);
-//    vett.push_back(p16);
-//    vett.push_back(p17);
 }
 
 void Modello::resetVett()
@@ -73,6 +59,15 @@ void Modello::togliPersona(unsigned short i)
         ++it;
     }
     vett.erase(it);
+}
+
+void Modello::miglioraPersona(unsigned short i)
+{
+    Vettore<Persona *>::Iteratore it = vett.itBegin();
+    for (unsigned int j=0; j<i; j++) {
+        ++it;
+    }
+    (*it)->migliora();
 }
 
 void Modello::insertDocente(std::string n, unsigned short e, double p, unsigned short o, bool c)
@@ -107,14 +102,56 @@ void Modello::insertTecnico(std::string n, unsigned short e, double p, unsigned 
 
 void Modello::modifyDocente(std::string n, unsigned short e, double p, unsigned short o, bool c, unsigned short i)
 {
-    Vettore<Persona *>::Iteratore it = vett.itBegin();
-    for (unsigned int j=0; j<i; j++) {
-        ++it;
-    }
-    Docente * x = dynamic_cast<Docente *>(*it);
+    Docente * x = dynamic_cast<Docente *>(getPersona(i));
     x->setNome(n);
     x->setEta(e);
     x->setPagaOraria(p);
     x->setOreLavoro(o);
     x->setCattedra(c);
 }
+
+void Modello::modifyDottorando(std::string n, unsigned short e, corsoLaurea c, bool reg, double m, std::string r, unsigned short i)
+{
+    Dottorando * x = dynamic_cast<Dottorando *>(getPersona(i));
+    x->setNome(n);
+    x->setEta(e);
+    x->setCorso(c);
+    x->setRegolare(reg);
+    x->setMedia(m);
+    x->setRicerca(r);
+}
+
+void Modello::modifyLaureando(std::string n, unsigned short e, corsoLaurea c, bool reg, double m, unsigned short v, unsigned short i)
+{
+    Laureando * x = dynamic_cast<Laureando *>(getPersona(i));
+    x->setNome(n);
+    x->setEta(e);
+    x->setCorso(c);
+    x->setRegolare(reg);
+    x->setMedia(m);
+    x->setVotoBase(v);
+}
+
+void Modello::modifyStudLav(std::string n, unsigned short e, double p, unsigned short o, corsoLaurea c, bool reg, double m, unsigned short i)
+{
+    StudenteLavoratore * x = dynamic_cast<StudenteLavoratore *>(getPersona(i));
+    x->setNome(n);
+    x->setEta(e);
+    x->setPagaOraria(p);
+    x->setOreLavoro(o);
+    x->setCorso(c);
+    x->setRegolare(reg);
+    x->setMedia(m);
+}
+
+void Modello::modifyTecnico(std::string n, unsigned short e, double p, unsigned short o, reparto r, unsigned short i)
+{
+    Tecnico * x = dynamic_cast<Tecnico *>(getPersona(i));
+    x->setNome(n);
+    x->setEta(e);
+    x->setPagaOraria(p);
+    x->setOreLavoro(o);
+    x->setReparto(r);
+}
+
+

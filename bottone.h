@@ -1,21 +1,21 @@
 #ifndef BOTTONE_H
 #define BOTTONE_H
 
-#include <QPushButton>
 #include "tipo.h"
+#include <QPushButton>
 
 class Bottone : public QPushButton
 {
     Q_OBJECT
 
 public:
-    Bottone(unsigned short, tipo, QWidget* parent = nullptr);
+    Bottone(short int, tipo, QWidget* parent = nullptr);
 
-    unsigned short getIndice();
+    short int getIndice();
     tipo getTipo();
 
 private:
-    unsigned short indice;
+    short int indice;
     tipo type;
 };
 

@@ -13,13 +13,23 @@ void Tecnico::setReparto(reparto r)
     settore = r;
 }
 
+double Tecnico::salario() const
+{
+    return Impiegato::salario() + (getOreLavoro() > 15 ? 75 : 25);
+}
 
 double Tecnico::costo() const
 {
-    return getOreLavoro() * getPagaOraria();
+    if (settore == server) {
+        return salario() + 100;
+    }
+    if (settore == laboratorio) {
+        return salario() + 75;
+    }
+    return salario() + 50;
 }
 
-void Tecnico::gestione()
+void Tecnico::migliora()
 {
-    setPagaOraria(1.15);
+    setPagaOraria(getPagaOraria() * 1.25);
 }

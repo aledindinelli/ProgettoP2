@@ -1,7 +1,7 @@
 #include "dialog.h"
 #include "controller.h"
 
-Dialog::Dialog(Controller * c, Vista * v, tipo t, QWidget * parent) : QDialog(parent, Qt::WindowTitleHint | Qt::WindowCloseButtonHint), controller(c), vista(v)
+Dialog::Dialog(Controller * c, Vista * v, tipo t, short int i, QWidget * parent) : QDialog(parent, Qt::WindowTitleHint | Qt::WindowCloseButtonHint), controller(c), vista(v), indicePersona(i)
 {
     layout = new QFormLayout();
 
@@ -33,10 +33,18 @@ Dialog::Dialog(Controller * c, Vista * v, tipo t, QWidget * parent) : QDialog(pa
         cattedra->setLayout(box);
         layout->addRow("Cattedra:", cattedra);
 
-        invio = new Bottone(-1, t);
-        invio->setText("Crea");
-        layout->addRow(invio);
-        connect(invio,SIGNAL(clicked()),this,SLOT(creaDocente()));
+        if (indicePersona == -1) {
+            invio = new Bottone(-1, t);
+            invio->setText("Crea");
+            layout->addRow(invio);
+            connect(invio, SIGNAL(clicked()), this, SLOT(creaDocente()));
+        }
+        else {
+            invio = new Bottone(indicePersona, t);
+            invio->setText("Modifica");
+            layout->addRow(invio);
+            connect(invio, SIGNAL(clicked()), this, SLOT(modificaDocente()));
+        }
 
         setLayout(layout);
     }
@@ -69,10 +77,18 @@ Dialog::Dialog(Controller * c, Vista * v, tipo t, QWidget * parent) : QDialog(pa
         ricerca = new QLineEdit();
         layout->addRow("Ricerca:", ricerca);
 
-        invio = new Bottone(-1, t);
-        invio->setText("Crea");
-        layout->addRow(invio);
-        connect(invio,SIGNAL(clicked()),this,SLOT(creaDottorando()));
+        if (indicePersona == -1) {
+            invio = new Bottone(-1, t);
+            invio->setText("Crea");
+            layout->addRow(invio);
+            connect(invio, SIGNAL(clicked()), this, SLOT(creaDottorando()));
+        }
+        else {
+            invio = new Bottone(indicePersona, t);
+            invio->setText("Modifica");
+            layout->addRow(invio);
+            connect(invio, SIGNAL(clicked()), this, SLOT(modificaDottorando()));
+        }
 
         setLayout(layout);
     }
@@ -106,10 +122,18 @@ Dialog::Dialog(Controller * c, Vista * v, tipo t, QWidget * parent) : QDialog(pa
         votoBase->setRange(60, 110);
         layout->addRow("Voto Base:", votoBase);
 
-        invio = new Bottone(-1, t);
-        invio->setText("Crea");
-        layout->addRow(invio);
-        connect(invio,SIGNAL(clicked()),this,SLOT(creaLaureando()));
+        if (indicePersona == -1) {
+            invio = new Bottone(-1, t);
+            invio->setText("Crea");
+            layout->addRow(invio);
+            connect(invio, SIGNAL(clicked()), this, SLOT(creaLaureando()));
+        }
+        else {
+            invio = new Bottone(indicePersona, t);
+            invio->setText("Modifica");
+            layout->addRow(invio);
+            connect(invio, SIGNAL(clicked()), this, SLOT(modificaLaureando()));
+        }
 
         setLayout(layout);
     }
@@ -146,10 +170,18 @@ Dialog::Dialog(Controller * c, Vista * v, tipo t, QWidget * parent) : QDialog(pa
         media->setRange(0, 30);
         layout->addRow("Media:", media);
 
-        invio = new Bottone(-1, t);
-        invio->setText("Crea");
-        layout->addRow(invio);
-        connect(invio,SIGNAL(clicked()),this,SLOT(creaStudLav()));
+        if (indicePersona == -1) {
+            invio = new Bottone(-1, t);
+            invio->setText("Crea");
+            layout->addRow(invio);
+            connect(invio, SIGNAL(clicked()), this, SLOT(creaStudLav()));
+        }
+        else {
+            invio = new Bottone(indicePersona, t);
+            invio->setText("Modifica");
+            layout->addRow(invio);
+            connect(invio, SIGNAL(clicked()), this, SLOT(modificaStudLav()));
+        }
 
         setLayout(layout);
     }
@@ -171,10 +203,18 @@ Dialog::Dialog(Controller * c, Vista * v, tipo t, QWidget * parent) : QDialog(pa
         reparto->insertItem(2, "Ufficio");
         layout->addRow("Reparto:", reparto);
 
-        invio = new Bottone(-1, t);
-        invio->setText("Crea");
-        layout->addRow(invio);
-        connect(invio,SIGNAL(clicked()),this,SLOT(creaTecnico()));
+        if (indicePersona == -1) {
+            invio = new Bottone(-1, t);
+            invio->setText("Crea");
+            layout->addRow(invio);
+            connect(invio, SIGNAL(clicked()), this, SLOT(creaTecnico()));
+        }
+        else {
+            invio = new Bottone(indicePersona, t);
+            invio->setText("Modifica");
+            layout->addRow(invio);
+            connect(invio, SIGNAL(clicked()), this, SLOT(modificaTecnico()));
+        }
 
         setLayout(layout);
     }
@@ -201,19 +241,8 @@ void Dialog::creaDottorando()
     double med = media->value();
     std::string ric = ricerca->text().toStdString();
 
-    int indice = corso->currentIndex();
-    if (indice == 0) {
-        controller->nuovoDottorando(name, e, ingegneria, regSi->isChecked(), med, ric);
-    }
-    if (indice == 1) {
-        controller->nuovoDottorando(name, e, informatica, regSi->isChecked(), med, ric);
-    }
-    if (indice == 2) {
-        controller->nuovoDottorando(name, e, psicologia, regSi->isChecked(), med, ric);
-    }
-    if (indice == 3) {
-        controller->nuovoDottorando(name, e, economia, regSi->isChecked(), med, ric);
-    }
+    unsigned int indice = corso->currentIndex();
+    controller->nuovoDottorando(name, e, indice, regSi->isChecked(), med, ric);
 
     vista->aggiornaApp();
     emit close();
@@ -226,19 +255,8 @@ void Dialog::creaLaureando()
     double med = media->value();
     unsigned short voto = votoBase->value();
 
-    int indice = corso->currentIndex();
-    if (indice == 0) {
-        controller->nuovoLaureando(name, e, ingegneria, regSi->isChecked(), med, voto);
-    }
-    if (indice == 1) {
-        controller->nuovoLaureando(name, e, informatica, regSi->isChecked(), med, voto);
-    }
-    if (indice == 2) {
-        controller->nuovoLaureando(name, e, psicologia, regSi->isChecked(), med, voto);
-    }
-    if (indice == 3) {
-        controller->nuovoLaureando(name, e, economia, regSi->isChecked(), med, voto);
-    }
+    unsigned int indice = corso->currentIndex();
+    controller->nuovoLaureando(name, e, indice, regSi->isChecked(), med, voto);
 
     vista->aggiornaApp();
     emit close();
@@ -252,19 +270,8 @@ void Dialog::creaStudLav()
     double p = paga->value();
     unsigned short o = ore->value();
 
-    int indice = corso->currentIndex();
-    if (indice == 0) {
-        controller->nuovoStudLav(name, e, ingegneria, regSi->isChecked(), med, o, p);
-    }
-    if (indice == 1) {
-        controller->nuovoStudLav(name, e, informatica, regSi->isChecked(), med, o, p);
-    }
-    if (indice == 2) {
-        controller->nuovoStudLav(name, e, psicologia, regSi->isChecked(), med, o, p);
-    }
-    if (indice == 3) {
-        controller->nuovoStudLav(name, e, economia, regSi->isChecked(), med, o, p);
-    }
+    unsigned int indice = corso->currentIndex();
+    controller->nuovoStudLav(name, e, indice, regSi->isChecked(), med, o, p);
 
     vista->aggiornaApp();
     emit close();
@@ -287,6 +294,95 @@ void Dialog::creaTecnico()
     if (indice == 2) {
         controller->nuovoTecnico(name, e, p, o, ufficio);
     }
+
+    vista->aggiornaApp();
+    emit close();
+}
+
+void Dialog::modificaDocente()
+{
+    Bottone* bottone = qobject_cast<Bottone *>(sender());
+    short int i = bottone->getIndice();
+
+    QString name = nome->text();
+    unsigned short e = eta->value();
+    double p = paga->value();
+    unsigned short o = ore->value();
+    bool c = false; if (cattSi->isChecked()) {c=true;};
+
+    controller->modificaDocente(name, e, p, o, c, i);
+
+    vista->aggiornaApp();
+    emit close();
+}
+
+void Dialog::modificaDottorando()
+{
+    Bottone* bottone = qobject_cast<Bottone *>(sender());
+    short int i = bottone->getIndice();
+
+    QString name = nome->text();
+    unsigned short e = eta->value();
+    bool reg = regSi->isChecked();
+    double med = media->value();
+    int indice = corso->currentIndex();
+    QString ric = ricerca->text();
+
+    controller->modificaDottorando(name, e, indice, reg, med, ric, i);
+
+    vista->aggiornaApp();
+    emit close();
+}
+
+void Dialog::modificaLaureando()
+{
+    Bottone* bottone = qobject_cast<Bottone *>(sender());
+    short int i = bottone->getIndice();
+
+    QString name = nome->text();
+    unsigned short e = eta->value();
+    bool reg = regSi->isChecked();
+    double med = media->value();
+    int indice = corso->currentIndex();
+    unsigned short voto = votoBase->value();
+
+    controller->modificaLaureando(name, e, indice, reg, med, voto, i);
+
+    vista->aggiornaApp();
+    emit close();
+}
+
+void Dialog::modificaStudLav()
+{
+    Bottone* bottone = qobject_cast<Bottone *>(sender());
+    short int i = bottone->getIndice();
+
+    QString name = nome->text();
+    unsigned short e = eta->value();
+    double p = paga->value();
+    unsigned short o = ore->value();
+    bool reg = regSi->isChecked();
+    double med = media->value();
+    int indice = corso->currentIndex();
+
+    controller->modificaStudLav(name, e, p, o, indice, reg, med, i);
+
+    vista->aggiornaApp();
+    emit close();
+}
+
+void Dialog::modificaTecnico()
+{
+    Bottone* bottone = qobject_cast<Bottone *>(sender());
+    short int i = bottone->getIndice();
+
+    QString name = nome->text();
+    unsigned short e = eta->value();
+    double p = paga->value();
+    unsigned short o = ore->value();
+    int r = reparto->currentIndex();
+
+    controller->modificaTecnico(name, e, p, o, r, i);
 
     vista->aggiornaApp();
     emit close();

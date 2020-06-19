@@ -3,6 +3,11 @@
 StudenteLavoratore::StudenteLavoratore(std::string n, unsigned short e, corsoLaurea c, bool r, double m, unsigned short o, double p)
     : Persona(n,e), Studente(n,e,c,r,m), Impiegato(n,e,o,p) {}
 
+double StudenteLavoratore::salario() const
+{
+    return Impiegato::salario() + (getRegolare() ? 100 : 0);
+}
+
 unsigned short StudenteLavoratore::tasse() const
 {
     unsigned short tax = Studente::tasse();
@@ -11,16 +16,16 @@ unsigned short StudenteLavoratore::tasse() const
 
 double StudenteLavoratore::costo() const
 {
-    return getOreLavoro() * getPagaOraria() - tasse() + rimborso();
+    return salario() - tasse() + rimborso();
 }
 
 unsigned short StudenteLavoratore::rimborso() const
 {
-    return getOreLavoro() * 5;
+    return getOreLavoro() * 10;
 }
 
-void StudenteLavoratore::gestione()
+void StudenteLavoratore::migliora()
 {
-    Studente::gestione();
-    setPagaOraria(1.15);
+    Studente::migliora();
+    setPagaOraria(getPagaOraria() * 1.20);
 }

@@ -1,8 +1,8 @@
 #include "bottone.h"
 
-Bottone::Bottone(unsigned short i, tipo t, QWidget *parent) : QPushButton(parent), indice(i) , type(t) {}
+Bottone::Bottone(short int i, tipo t, QWidget *parent) : QPushButton(parent), indice(i) , type(t) {}
 
-unsigned short Bottone::getIndice()
+short int Bottone::getIndice()
 {
     return indice;
 }

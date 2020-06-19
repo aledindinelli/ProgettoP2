@@ -26,7 +26,7 @@ public:
 
     virtual unsigned short tasse() const;
     virtual double costo() const;
-    virtual void gestione();
+    virtual void migliora();
 };
 
 #endif // STUDENTE_H

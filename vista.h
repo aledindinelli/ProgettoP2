@@ -17,7 +17,6 @@
 #include <QLineEdit>
 #include <QMessageBox>
 #include <QLCDNumber>
-#include <QButtonGroup>
 #include <QPushButton>
 #include <QScrollArea>
 #include <QDialog>
@@ -40,6 +39,7 @@ private slots:
     void showGuida();
     void resetApp();
     void eliminaPersona();
+    void upgradePersona();
 
     void dettagliDocente();
     void dettagliDottorando();
@@ -59,8 +59,6 @@ private slots:
     void modificaStudLav();
     void modificaTecnico();
 
-    void modifyDocente();
-
 private:
     Controller * controller;
     QGridLayout * mainLayout;
@@ -75,9 +73,10 @@ private:
     void addPersoneBox();
     void addDettagliBox();
 
-    void dettagliPersona(unsigned short, QVBoxLayout *);
-    void dettagliImpiegato(unsigned short, QVBoxLayout *);
-    void dettagliStudente(unsigned short, QVBoxLayout *);
+    void dettagliPersona(short int, QVBoxLayout *);
+    void dettagliImpiegato(short int, QVBoxLayout *);
+    void dettagliStudente(short int, QVBoxLayout *);
+    void costoPersona(short int, QVBoxLayout *);
 };
 
 #endif // VISTA_H

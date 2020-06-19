@@ -59,7 +59,7 @@ double Studente::costo() const
     }
 }
 
-void Studente::gestione()
+void Studente::migliora()
 {
     regolare = true;
     media += 1;

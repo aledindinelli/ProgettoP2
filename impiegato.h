@@ -13,6 +13,7 @@ public:
     Impiegato(std::string, unsigned short, unsigned short, double);
     virtual ~Impiegato() = default;
 
+    virtual double salario() const;
     virtual double getPagaOraria() const;
     virtual void setPagaOraria(double);
     virtual unsigned short getOreLavoro() const;

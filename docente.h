@@ -16,8 +16,9 @@ public:
     bool getCattedra() const;
     void setCattedra(bool);
 
+    virtual double salario() const;
     virtual double costo() const;
-    virtual void gestione() ;
+    virtual void migliora();
 };
 
 #endif // DOCENTE_H

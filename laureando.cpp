@@ -1,6 +1,6 @@
 #include "laureando.h"
 
-unsigned short Laureando::bonusVoto = 200;
+unsigned short Laureando::bonusVoto = 100;
 
 Laureando::Laureando(std::string n, unsigned short e, corsoLaurea c, bool r, double m, unsigned short v)
     : Persona(n,e), Studente(n,e,c,r,m), votoBase(v) {}
@@ -23,8 +23,8 @@ double Laureando::costo() const
     return Studente::costo();
 }
 
-void Laureando::gestione()
+void Laureando::migliora()
 {
-    Studente::gestione();
+    Studente::migliora();
     votoBase += 1;
 }

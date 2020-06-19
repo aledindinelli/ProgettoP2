@@ -17,7 +17,7 @@ public:
     void setVotoBase(unsigned short);
 
     virtual double costo() const;
-    virtual void gestione();
+    virtual void migliora();
 };
 
 #endif // LAUREANDO_H

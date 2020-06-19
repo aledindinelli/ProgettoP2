@@ -2,6 +2,11 @@
 
 Impiegato::Impiegato(std::string n, unsigned short e, unsigned short o, double p) : Persona(n,e), oreLavoro(o), pagaOraria(p) {}
 
+double Impiegato::salario() const
+{
+    return pagaOraria * oreLavoro;
+}
+
 double Impiegato::getPagaOraria() const
 {
     return pagaOraria;

@@ -20,7 +20,7 @@ public:
     virtual void setEta(unsigned short);
 
     virtual double costo() const = 0;
-    virtual void gestione() = 0;
+    virtual void migliora() = 0;
 };
 
 #endif // PERSONA_H
