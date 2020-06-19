@@ -246,6 +246,7 @@ void Vista::modificaDocente()
     unsigned short i = bottone->getIndice();
 
     Dialog * finestra = new Dialog(controller, this, docente);
+    finestra->setWindowTitle(tr("Modifica Docente"));
 
     QString name = controller->getNomePersona(i);
     unsigned short e = controller->getEtaPersona(i);
@@ -257,43 +258,42 @@ void Vista::modificaDocente()
     finestra->eta->setValue(e);
     finestra->paga->setValue(p);
     finestra->ore->setValue(o);
-//    if (c) {
-//        finestra->regSi->setChecked(true);
-//        finestra->regSi->setChecked(false);
-//    }
-//    else {
-//        finestra->regSi->setChecked(false);
-//        finestra->regSi->setChecked(true);
-//    }
+    if (!c) {
+        finestra->cattSi->setChecked(false);
+        finestra->cattNo->setChecked(true);
+    }
+    else {
+        finestra->cattSi->setChecked(true);
+        finestra->cattNo->setChecked(false);
+    }
 
     delete finestra->invio;
-    finestra->invio = new QPushButton("Modifica");
+    finestra->invio = new Bottone(i, docente);
+    finestra->invio->setText("Modifica");
     connect(finestra->invio, SIGNAL(clicked()), this, SLOT(modifyDocente()));
     finestra->layout->addRow(finestra->invio);
+
+    finestra->exec();
 }
 
 void Vista::modificaDottorando()
 {
-    Bottone* bottone = qobject_cast<Bottone *>(sender());
-    unsigned short i = bottone->getIndice();
+
 }
 
 void Vista::modificaLaureando()
 {
-    Bottone* bottone = qobject_cast<Bottone *>(sender());
-    unsigned short i = bottone->getIndice();
+
 }
 
 void Vista::modificaStudLav()
 {
-    Bottone* bottone = qobject_cast<Bottone *>(sender());
-    unsigned short i = bottone->getIndice();
+
 }
 
 void Vista::modificaTecnico()
 {
-    Bottone* bottone = qobject_cast<Bottone *>(sender());
-    unsigned short i = bottone->getIndice();
+
 }
 
 void Vista::modifyDocente()
@@ -491,7 +491,7 @@ void Vista::dettagliStudente(unsigned short i, QVBoxLayout * lista)
     labelReg->setText(*Regolare);
     lista->addWidget(labelReg);
 
-    QString * Media = new QString("<b>Media:</b> ");
+    QString * Media = new QString("<b>Media Voti:</b> ");
     Media->append(QString::number(controller->getMediaStudente(i)));
     QLabel * labelMedia = new QLabel();
     labelMedia->setText(*Media);

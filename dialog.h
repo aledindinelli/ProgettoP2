@@ -2,6 +2,7 @@
 #define DIALOG_H
 
 #include "tipo.h"
+#include "bottone.h"
 
 //togliere roba inutile
 #include <QMainWindow>
@@ -51,6 +52,7 @@ private:
     QDoubleSpinBox * paga;
     QSpinBox * ore;
     QRadioButton * cattSi;
+    QRadioButton * cattNo;
     QComboBox * corso;
     QRadioButton * regSi;
     QRadioButton * regNo;
@@ -59,7 +61,7 @@ private:
     QSpinBox * votoBase;
     QSpinBox * bonusVoto;
     QComboBox * reparto;
-    QPushButton * invio;
+    Bottone * invio;
 
 public:
     Dialog(Controller *, Vista *, tipo, QWidget * parent = nullptr);

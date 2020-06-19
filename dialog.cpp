@@ -14,6 +14,8 @@ Dialog::Dialog(Controller * c, Vista * v, tipo t, QWidget * parent) : QDialog(pa
 
     if (t == docente)
     {
+        setWindowTitle(tr("Nuovo Docente"));
+
         paga = new QDoubleSpinBox();
         paga->setRange(0, 9999);
         layout->addRow("Paga Oraria:", paga);
@@ -23,15 +25,16 @@ Dialog::Dialog(Controller * c, Vista * v, tipo t, QWidget * parent) : QDialog(pa
 
         QGroupBox * cattedra = new QGroupBox();
         cattSi = new QRadioButton(tr("&Si"));
-        QRadioButton * no = new QRadioButton(tr("N&o"));
+        cattNo = new QRadioButton(tr("N&o"));
         cattSi->setChecked(true);
         QHBoxLayout *box = new QHBoxLayout;
         box->addWidget(cattSi);
-        box->addWidget(no);
+        box->addWidget(cattNo);
         cattedra->setLayout(box);
         layout->addRow("Cattedra:", cattedra);
 
-        invio = new QPushButton("Crea");
+        invio = new Bottone(-1, t);
+        invio->setText("Crea");
         layout->addRow(invio);
         connect(invio,SIGNAL(clicked()),this,SLOT(creaDocente()));
 
@@ -40,6 +43,8 @@ Dialog::Dialog(Controller * c, Vista * v, tipo t, QWidget * parent) : QDialog(pa
 
     if (t == dottorando)
     {
+        setWindowTitle(tr("Nuovo Dottorando"));
+
         corso = new QComboBox();
         corso->insertItem(0, "Ingegneria");
         corso->insertItem(1, "Informatica");
@@ -64,7 +69,8 @@ Dialog::Dialog(Controller * c, Vista * v, tipo t, QWidget * parent) : QDialog(pa
         ricerca = new QLineEdit();
         layout->addRow("Ricerca:", ricerca);
 
-        invio = new QPushButton("Crea");
+        invio = new Bottone(-1, t);
+        invio->setText("Crea");
         layout->addRow(invio);
         connect(invio,SIGNAL(clicked()),this,SLOT(creaDottorando()));
 
@@ -73,6 +79,8 @@ Dialog::Dialog(Controller * c, Vista * v, tipo t, QWidget * parent) : QDialog(pa
 
     if (t == laureando)
     {
+        setWindowTitle(tr("Nuovo Laureando"));
+
         corso = new QComboBox();
         corso->insertItem(0, "Ingegneria");
         corso->insertItem(1, "Informatica");
@@ -98,7 +106,8 @@ Dialog::Dialog(Controller * c, Vista * v, tipo t, QWidget * parent) : QDialog(pa
         votoBase->setRange(60, 110);
         layout->addRow("Voto Base:", votoBase);
 
-        invio = new QPushButton("Crea");
+        invio = new Bottone(-1, t);
+        invio->setText("Crea");
         layout->addRow(invio);
         connect(invio,SIGNAL(clicked()),this,SLOT(creaLaureando()));
 
@@ -107,6 +116,8 @@ Dialog::Dialog(Controller * c, Vista * v, tipo t, QWidget * parent) : QDialog(pa
 
     if (t == studlavoratore)
     {
+        setWindowTitle(tr("Nuovo Studente Lavoratore"));
+
         paga = new QDoubleSpinBox();
         paga->setRange(0, 9999);
         layout->addRow("Paga Oraria:", paga);
@@ -135,7 +146,8 @@ Dialog::Dialog(Controller * c, Vista * v, tipo t, QWidget * parent) : QDialog(pa
         media->setRange(0, 30);
         layout->addRow("Media:", media);
 
-        invio = new QPushButton("Crea");
+        invio = new Bottone(-1, t);
+        invio->setText("Crea");
         layout->addRow(invio);
         connect(invio,SIGNAL(clicked()),this,SLOT(creaStudLav()));
 
@@ -144,6 +156,8 @@ Dialog::Dialog(Controller * c, Vista * v, tipo t, QWidget * parent) : QDialog(pa
 
     if (t == tecnico)
     {
+        setWindowTitle(tr("Nuovo Tecnico"));
+
         paga = new QDoubleSpinBox();
         paga->setRange(0, 9999);
         layout->addRow("Paga Oraria:", paga);
@@ -157,7 +171,8 @@ Dialog::Dialog(Controller * c, Vista * v, tipo t, QWidget * parent) : QDialog(pa
         reparto->insertItem(2, "Ufficio");
         layout->addRow("Reparto:", reparto);
 
-        invio = new QPushButton("Crea");
+        invio = new Bottone(-1, t);
+        invio->setText("Crea");
         layout->addRow(invio);
         connect(invio,SIGNAL(clicked()),this,SLOT(creaTecnico()));
 
