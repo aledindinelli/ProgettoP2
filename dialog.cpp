@@ -71,7 +71,7 @@ Dialog::Dialog(Controller * c, Vista * v, tipo t, short int i, QWidget * parent)
         layout->addRow("Regolare:", regolare);
 
         media = new QDoubleSpinBox();
-        media->setRange(0, 30);
+        media->setRange(18, 30);
         layout->addRow("Media:", media);
 
         ricerca = new QLineEdit();
@@ -115,7 +115,7 @@ Dialog::Dialog(Controller * c, Vista * v, tipo t, short int i, QWidget * parent)
         layout->addRow("Regolare:", regolare);
 
         media = new QDoubleSpinBox();
-        media->setRange(0, 30);
+        media->setRange(18, 30);
         layout->addRow("Media:", media);
 
         votoBase = new QSpinBox();
@@ -167,7 +167,7 @@ Dialog::Dialog(Controller * c, Vista * v, tipo t, short int i, QWidget * parent)
         layout->addRow("Regolare:", regolare);
 
         media = new QDoubleSpinBox();
-        media->setRange(0, 30);
+        media->setRange(18, 30);
         layout->addRow("Media:", media);
 
         if (indicePersona == -1) {
