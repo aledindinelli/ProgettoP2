@@ -133,11 +133,19 @@ tipo Controller::getTipoPersona(unsigned short i) const
 
 void Controller::nuovoDocente(std::string n, unsigned short e, double p, unsigned short o, bool c)
 {
+    if (n=="" || e==0U || p==0 || o==0U) {
+        throw new std::domain_error("<p>E' stato rilevato un errore nell'input.<p>"
+                                    "<ul><li>Il campo <b>Nome</b> non deve essere vuoto.</li><li>I campi <b>Paga</b> e <b>Ore</b> non devono essere 0.</li></ul>");
+    }
     model->insertDocente(n, e, p, o, c);
 }
 
 void Controller::nuovoDottorando(std::string n, unsigned short e, unsigned int c, bool r, double m, std::string ric)
 {
+    if (n=="" || ric=="") {
+        throw new std::domain_error("<p>E' stato rilevato un errore nell'input.<p>"
+                                    "<ul><li>I campi <b>Nome</b> e <b>Ricerca</b> non devono essere vuoti.</li></ul>");
+    }
     if (c == 0) {
         model->insertDottorando(n, e, ingegneria, r, m, ric);
     }
@@ -154,6 +162,10 @@ void Controller::nuovoDottorando(std::string n, unsigned short e, unsigned int c
 
 void Controller::nuovoLaureando(std::string n, unsigned short e, unsigned int c, bool r, double m, unsigned short v)
 {
+    if (n=="") {
+        throw new std::domain_error("<p>E' stato rilevato un errore nell'input.<p>"
+                                    "<ul><li>Il campo <b>Nome</b> non deve essere vuoto.</li></ul>");
+    }
     if (c == 0) {
         model->insertLaureando(n, e, ingegneria, r, m, v);
     }
@@ -170,6 +182,10 @@ void Controller::nuovoLaureando(std::string n, unsigned short e, unsigned int c,
 
 void Controller::nuovoStudLav(std::string n, unsigned short e, unsigned int c, bool r, double m, unsigned short o, double p)
 {
+    if (n=="" || e==0U || p==0 || o==0U) {
+        throw new std::domain_error("<p>E' stato rilevato un errore nell'input.<p>"
+                                    "<ul><li>Il campo <b>Nome</b> non deve essere vuoto.</li><li>I campi <b>Paga</b> e <b>Ore</b> non devono essere 0.</li></ul>");
+    }
     if (c == 0) {
         model->insertStudLav(n, e, p, o, ingegneria, r, m);
     }
@@ -186,6 +202,10 @@ void Controller::nuovoStudLav(std::string n, unsigned short e, unsigned int c, b
 
 void Controller::nuovoTecnico(std::string n, unsigned short e, double p, unsigned short o, unsigned int r)
 {
+    if (n=="" || e==0U || p==0 || o==0U) {
+        throw new std::domain_error("<p>E' stato rilevato un errore nell'input.<p>"
+                                    "<ul><li>Il campo <b>Nome</b> non deve essere vuoto.</li><li>I campi <b>Paga</b> e <b>Ore</b> non devono essere 0.</li></ul>");
+    }
     if (r == 0) {
         model->insertTecnico(n, e, p, o, server);
     }
@@ -199,11 +219,19 @@ void Controller::nuovoTecnico(std::string n, unsigned short e, double p, unsigne
 
 void Controller::modificaDocente(QString n, unsigned short e, double p, unsigned short o, bool c, unsigned short i)
 {
+    if (n=="" || e==0U || p==0 || o==0U) {
+        throw new std::domain_error("<p>E' stato rilevato un errore nell'input.<p>"
+                                    "<ul><li>Il campo <b>Nome</b> non deve essere vuoto.</li><li>I campi <b>Paga</b> e <b>Ore</b> non devono essere 0.</li></ul>");
+    }
     model->modifyDocente(n.toStdString(), e, p, o, c, i);
 }
 
 void Controller::modificaDottorando(QString n, unsigned short e, unsigned int c, bool reg, double m, QString r, unsigned short i)
 {
+    if (n=="" || r=="") {
+        throw new std::domain_error("<p>E' stato rilevato un errore nell'input.<p>"
+                                    "<ul><li>I campi <b>Nome</b> e <b>Ricerca</b> non devono essere vuoti.</li></ul>");
+    }
     if (c == 0) {
         model->modifyDottorando(n.toStdString(), e, ingegneria, reg, m, r.toStdString(), i);
     }
@@ -220,6 +248,10 @@ void Controller::modificaDottorando(QString n, unsigned short e, unsigned int c,
 
 void Controller::modificaLaureando(QString n, unsigned short e, unsigned int c, bool reg, double m, unsigned short v, unsigned short i)
 {
+    if (n=="") {
+        throw new std::domain_error("<p>E' stato rilevato un errore nell'input.<p>"
+                                    "<ul><li>Il campo <b>Nome</b> non deve essere vuoto.</li></ul>");
+    }
     if (c == 0) {
         model->modifyLaureando(n.toStdString(), e, ingegneria, reg, m, v, i);
     }
@@ -236,6 +268,10 @@ void Controller::modificaLaureando(QString n, unsigned short e, unsigned int c, 
 
 void Controller::modificaStudLav(QString n, unsigned short e, double p, unsigned short o, unsigned int c, bool reg, double m, unsigned short i)
 {
+    if (n=="" || e==0U || p==0 || o==0U) {
+        throw new std::domain_error("<p>E' stato rilevato un errore nell'input.<p>"
+                                    "<ul><li>Il campo <b>Nome</b> non deve essere vuoto.</li><li>I campi <b>Paga</b> e <b>Ore</b> non devono essere 0.</li></ul>");
+    }
     if (c == 0) {
         model->modifyStudLav(n.toStdString(), e, p, o, ingegneria, reg, m, i);
     }
@@ -252,6 +288,10 @@ void Controller::modificaStudLav(QString n, unsigned short e, double p, unsigned
 
 void Controller::modificaTecnico(QString n, unsigned short e, double p, unsigned short o, unsigned int r, unsigned short i)
 {
+    if (n=="" || e==0U || p==0 || o==0U) {
+        throw new std::domain_error("<p>E' stato rilevato un errore nell'input.<p>"
+                                    "<ul><li>Il campo <b>Nome</b> non deve essere vuoto.</li><li>I campi <b>Paga</b> e <b>Ore</b> non devono essere 0.</li></ul>");
+    }
     if (r == 0) {
         model->modifyTecnico(n.toStdString(), e, p, o, server, i);
     }

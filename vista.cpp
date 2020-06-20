@@ -3,7 +3,7 @@
 
 Vista::Vista(Controller * c, QWidget *parent) : QMainWindow(parent), controller(c)
 {
-    setWindowTitle(tr("NOME APPLICAZIONE")); // cambiare titolo
+    setWindowTitle(tr("Università Tascabile"));
 
     QWidget * central = new QWidget(this);
     mainLayout = new QGridLayout(central);
@@ -22,7 +22,7 @@ Vista::Vista(Controller * c, QWidget *parent) : QMainWindow(parent), controller(
     mainLayout->setRowStretch(0,0);
     mainLayout->setRowStretch(1,1);
     mainLayout->setColumnStretch(1, 1);
-    mainLayout->setColumnMinimumWidth(0, 350);
+    mainLayout->setColumnMinimumWidth(0, 375);
     mainLayout->setColumnMinimumWidth(1, 200);
     mainLayout->setRowMinimumHeight(0, 70);
     mainLayout->setRowMinimumHeight(1, 200);
@@ -55,7 +55,7 @@ void Vista::aggiornaApp()
     mainLayout->setRowStretch(0,0);
     mainLayout->setRowStretch(1,1);
     mainLayout->setColumnStretch(1, 1);
-    mainLayout->setColumnMinimumWidth(0, 350);
+    mainLayout->setColumnMinimumWidth(0, 375);
     mainLayout->setColumnMinimumWidth(1, 200);
     mainLayout->setRowMinimumHeight(0, 70);
     mainLayout->setRowMinimumHeight(1, 200);
@@ -64,12 +64,27 @@ void Vista::aggiornaApp()
     setCentralWidget(central);
 }
 
+void Vista::showErrorMessage(const QString & message)
+{
+    QMessageBox * warning = new QMessageBox();
+    warning->setWindowTitle("Errore");
+    warning->setText(message);
+    warning->show();
+}
+
 void Vista::showGuida()
 {
-    QMessageBox::about(this, tr("NOME APPLICAZIONE"),  // cambiare titolo
-                       tr("<p>"
-                          "Questa applicazione è pensata per boh"
-                          "</p>"));  // mettere guida
+    QMessageBox::about(this, tr("Università Tascabile"),
+                       tr(
+                           "<p>Benvenuti in <b>Università Tascabile</b>, questa applicazione è pensata per agevolare il carico di lavoro di una persona che debba gestire un gruppo di persone all'interno dell'Università ed il costo annesso.</p>"
+                           "<ul>"
+                           "<li>Per inserire una nuova persona scegliere la voce Nuovo nel menù File, e poi scegliere il tipo di persona desiderata.</li>"
+                           "<li>Per resettare l'applicazione segliere la voce Reset del menù File.</li>"
+                           "<li>Per visualizzare i dettagli di una persona cliccare sul rispettivo pulsante.</li>"
+                           "<li>In ordine da sinistra verso destra i pulsanti hanno la funzionalità di modifica, upgrade ed eliminazione.</li>"
+                           "<li>A seguito di una aggiunta, modifica o eliminazione, l'indicatore del costo totale si aggiorna automaticamente.</li>"
+                           "</ul>"
+                          ));
 }
 
 void Vista::resetApp()
@@ -269,8 +284,8 @@ void Vista::modificaDocente()
 
     QString name = controller->getNomePersona(i);
     unsigned short e = controller->getEtaPersona(i);
-    unsigned short p = controller->getOreImpiegato(i);
-    double o = controller->getPagaImpiegato(i);
+    unsigned short p = controller->getPagaImpiegato(i);
+    double o = controller->getOreImpiegato(i);
     bool c = controller->getCattedraDocente(i);
 
     finestra->nome->setText(name);
@@ -385,8 +400,8 @@ void Vista::modificaStudLav()
 
     QString name = controller->getNomePersona(i);
     unsigned short e = controller->getEtaPersona(i);
-    unsigned short p = controller->getOreImpiegato(i);
-    double o = controller->getPagaImpiegato(i);
+    unsigned short p = controller->getPagaImpiegato(i);
+    double o = controller->getOreImpiegato(i);
     double med = controller->getMediaStudente(i);
     bool reg = controller->getRegolareStudente(i);
     QString c = controller->getCorsoStudente(i);
@@ -429,8 +444,8 @@ void Vista::modificaTecnico()
 
     QString name = controller->getNomePersona(i);
     unsigned short e = controller->getEtaPersona(i);
-    unsigned short p = controller->getOreImpiegato(i);
-    double o = controller->getPagaImpiegato(i);
+    unsigned short p = controller->getPagaImpiegato(i);
+    double o = controller->getOreImpiegato(i);
     QString rep = controller->getRepartoTecnico(i);
 
     finestra->nome->setText(name);
@@ -538,7 +553,7 @@ void Vista::addPersoneBox()
         Bottone * modifica = new Bottone(i, t);
         modifica->setIcon(QIcon(":./Risorse/modify.png"));
         Bottone * upgrade = new Bottone(i, t);
-//        upgrade->setIcon(QIcon(""));
+        upgrade->setIcon(QIcon(":./Risorse/upload.png"));
         Bottone * elimina = new Bottone(i, t);
         elimina->setIcon(QIcon(":./Risorse/eraser.png"));
         riga->addWidget(bottone, 65);

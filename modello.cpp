@@ -23,27 +23,27 @@ double Modello::getCostoTotale() const
 
 void Modello::popolaVettore()
 {
-//    Persona* p1 = new Laureando("Paolo Rossi", 30, ingegneria, false, 25, 90);
-//    Persona* p2 = new Laureando("Paolo Rossi", 30, ingegneria, false, 25, 90);
-//    Persona* p3 = new Laureando("Paolo Rossi", 30, ingegneria, false, 25, 90);
-//    Persona* p4 = new Laureando("Paolo Rossi", 30, ingegneria, false, 25, 90);
-//    Persona* p5 = new Laureando("Paolo Rossi", 30, ingegneria, false, 25, 90);
-//    Persona* p6 = new Laureando("Paolo Rossi", 30, ingegneria, false, 25, 90);
-//    Persona* p7 = new Laureando("Paolo Rossi", 30, ingegneria, false, 25, 90);
-//    Persona* p8 = new Laureando("Paolo Rossi", 30, ingegneria, false, 25, 90);
-//    Persona* p9 = new Laureando("Paolo Rossi", 30, ingegneria, false, 25, 90);
-//    Persona* p10 = new Laureando("Paolo Rossi", 30, ingegneria, false, 25, 90);
+    Persona* p1 = new Laureando("Paolo Rossi", 18, ingegneria, false, 25, 90);
+    Persona* p2 = new Docente("Sara Bianchi", 50, 30, true, 25);
+    Persona* p3 = new StudenteLavoratore("Andrea Mario", 24, ingegneria, true, 25, 15, 15);
+    Persona* p4 = new Tecnico("Bobo Vieri", 45, 30, ufficio, 20);
+    Persona* p5 = new Dottorando("Carla Bruni", 28, economia, true, 26, "Economia Internazionale");
+    Persona* p6 = new Docente("Gigi Buffon", 55, 40, false, 20);
+    Persona* p7 = new StudenteLavoratore("Mattia Verdi", 20, economia, false, 23, 20, 15);
+    Persona* p8 = new Laureando("Giulio Cesare", 20, informatica, true, 28, 100);
+    Persona* p9 = new Dottorando("Luigi Bruni", 29, psicologia, false, 20, "Psicanalisi");
+    Persona* p10 = new Tecnico("Silvia Rossi", 40, 25, server, 15);
 
-//    vett.push_back(p1);
-//    vett.push_back(p2);
-//    vett.push_back(p3);
-//    vett.push_back(p4);
-//    vett.push_back(p5);
-//    vett.push_back(p6);
-//    vett.push_back(p7);
-//    vett.push_back(p8);
-//    vett.push_back(p9);
-//    vett.push_back(p10);
+    vett.push_back(p1);
+    vett.push_back(p2);
+    vett.push_back(p3);
+    vett.push_back(p4);
+    vett.push_back(p5);
+    vett.push_back(p6);
+    vett.push_back(p7);
+    vett.push_back(p8);
+    vett.push_back(p9);
+    vett.push_back(p10);
 }
 
 void Modello::resetVett()

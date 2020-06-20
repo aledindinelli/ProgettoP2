@@ -34,6 +34,7 @@ class Vista : public QMainWindow
 public:
     Vista(Controller *, QWidget *parent = nullptr);
     void aggiornaApp();
+    void showErrorMessage(const QString&);
 
 private slots:
     void showGuida();

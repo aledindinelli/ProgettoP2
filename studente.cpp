@@ -51,16 +51,22 @@ unsigned short Studente::tasse() const
 
 double Studente::costo() const
 {
-    switch (corso) {
-    case ingegneria: return 900 - tasse();
-    case informatica: return 850 - tasse();
-    case psicologia: return 800 - tasse();
-    case economia: return 950 - tasse();
+    if (corso == ingegneria) {
+        return 900 - tasse();
     }
+    if (corso == informatica) {
+        return 850 - tasse();
+    }
+    if (corso == psicologia) {
+        return 800 - tasse();
+    }
+    return 950 - tasse();
 }
 
 void Studente::migliora()
 {
     regolare = true;
-    media += 1;
+    if (media <= 30) {
+        media += 1;
+    }
 }

@@ -2,5 +2,6 @@
     <qresource prefix="/">
         <file>Risorse/eraser.png</file>
         <file>Risorse/modify.png</file>
+        <file>Risorse/upload.png</file>
     </qresource>
 </RCC>

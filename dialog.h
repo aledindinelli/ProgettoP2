@@ -4,7 +4,6 @@
 #include "tipo.h"
 #include "bottone.h"
 
-//togliere roba inutile
 #include <QMainWindow>
 #include <QWidget>
 #include <QFormLayout>

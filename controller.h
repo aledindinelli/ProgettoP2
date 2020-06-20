@@ -3,6 +3,8 @@
 
 #include <QObject>
 
+#include <stdexcept>
+
 #include "vista.h"
 #include "modello.h"
 #include "tipo.h"

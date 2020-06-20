@@ -228,10 +228,13 @@ void Dialog::creaDocente()
     unsigned short o = ore->value();
     bool c = false; if (cattSi->isChecked()) {c=true;}
 
-    controller->nuovoDocente(name, e, p, o, c);
-
-    vista->aggiornaApp();
-    emit close();
+    try {
+        controller->nuovoDocente(name, e, p, o, c);
+        vista->aggiornaApp();
+        emit close();
+    } catch (std::exception* exc) {
+        vista->showErrorMessage(exc->what());
+    }
 }
 
 void Dialog::creaDottorando()
@@ -240,12 +243,15 @@ void Dialog::creaDottorando()
     unsigned short e = eta->value();
     double med = media->value();
     std::string ric = ricerca->text().toStdString();
-
     unsigned int indice = corso->currentIndex();
-    controller->nuovoDottorando(name, e, indice, regSi->isChecked(), med, ric);
 
-    vista->aggiornaApp();
-    emit close();
+    try {
+        controller->nuovoDottorando(name, e, indice, regSi->isChecked(), med, ric);
+        vista->aggiornaApp();
+        emit close();
+    } catch (std::exception* exc) {
+        vista->showErrorMessage(exc->what());
+    }
 }
 
 void Dialog::creaLaureando()
@@ -254,12 +260,15 @@ void Dialog::creaLaureando()
     unsigned short e = eta->value();
     double med = media->value();
     unsigned short voto = votoBase->value();
-
     unsigned int indice = corso->currentIndex();
-    controller->nuovoLaureando(name, e, indice, regSi->isChecked(), med, voto);
 
-    vista->aggiornaApp();
-    emit close();
+    try {
+        controller->nuovoLaureando(name, e, indice, regSi->isChecked(), med, voto);
+        vista->aggiornaApp();
+        emit close();
+    } catch (std::exception* exc) {
+        vista->showErrorMessage(exc->what());
+    }
 }
 
 void Dialog::creaStudLav()
@@ -269,12 +278,15 @@ void Dialog::creaStudLav()
     double med = media->value();
     double p = paga->value();
     unsigned short o = ore->value();
-
     unsigned int indice = corso->currentIndex();
-    controller->nuovoStudLav(name, e, indice, regSi->isChecked(), med, o, p);
 
-    vista->aggiornaApp();
-    emit close();
+    try {
+        controller->nuovoStudLav(name, e, indice, regSi->isChecked(), med, o, p);
+        vista->aggiornaApp();
+        emit close();
+    } catch (std::exception* exc) {
+        vista->showErrorMessage(exc->what());
+    }
 }
 
 void Dialog::creaTecnico()
@@ -283,20 +295,23 @@ void Dialog::creaTecnico()
     unsigned short e = eta->value();
     double p = paga->value();
     unsigned short o = ore->value();
+    unsigned int indice = corso->currentIndex();
 
-    int indice = reparto->currentIndex();
-    if (indice == 0) {
-        controller->nuovoTecnico(name, e, p, o, server);
+    try {
+        if (indice == 0) {
+            controller->nuovoTecnico(name, e, p, o, server);
+        }
+        if (indice == 1) {
+            controller->nuovoTecnico(name, e, p, o, laboratorio);
+        }
+        if (indice == 2) {
+            controller->nuovoTecnico(name, e, p, o, ufficio);
+        }
+        vista->aggiornaApp();
+        emit close();
+    } catch (std::exception* exc) {
+        vista->showErrorMessage(exc->what());
     }
-    if (indice == 1) {
-        controller->nuovoTecnico(name, e, p, o, laboratorio);
-    }
-    if (indice == 2) {
-        controller->nuovoTecnico(name, e, p, o, ufficio);
-    }
-
-    vista->aggiornaApp();
-    emit close();
 }
 
 void Dialog::modificaDocente()
@@ -310,10 +325,13 @@ void Dialog::modificaDocente()
     unsigned short o = ore->value();
     bool c = false; if (cattSi->isChecked()) {c=true;};
 
-    controller->modificaDocente(name, e, p, o, c, i);
-
-    vista->aggiornaApp();
-    emit close();
+    try {
+        controller->modificaDocente(name, e, p, o, c, i);
+        vista->aggiornaApp();
+        emit close();
+    } catch (std::exception* exc) {
+        vista->showErrorMessage(exc->what());
+    }
 }
 
 void Dialog::modificaDottorando()
@@ -328,10 +346,13 @@ void Dialog::modificaDottorando()
     int indice = corso->currentIndex();
     QString ric = ricerca->text();
 
-    controller->modificaDottorando(name, e, indice, reg, med, ric, i);
-
-    vista->aggiornaApp();
-    emit close();
+    try {
+        controller->modificaDottorando(name, e, indice, reg, med, ric, i);
+        vista->aggiornaApp();
+        emit close();
+    } catch (std::exception* exc) {
+        vista->showErrorMessage(exc->what());
+    }
 }
 
 void Dialog::modificaLaureando()
@@ -346,10 +367,13 @@ void Dialog::modificaLaureando()
     int indice = corso->currentIndex();
     unsigned short voto = votoBase->value();
 
-    controller->modificaLaureando(name, e, indice, reg, med, voto, i);
-
-    vista->aggiornaApp();
-    emit close();
+    try {
+        controller->modificaLaureando(name, e, indice, reg, med, voto, i);
+        vista->aggiornaApp();
+        emit close();
+    } catch (std::exception* exc) {
+        vista->showErrorMessage(exc->what());
+    }
 }
 
 void Dialog::modificaStudLav()
@@ -365,10 +389,13 @@ void Dialog::modificaStudLav()
     double med = media->value();
     int indice = corso->currentIndex();
 
-    controller->modificaStudLav(name, e, p, o, indice, reg, med, i);
-
-    vista->aggiornaApp();
-    emit close();
+    try {
+        controller->modificaStudLav(name, e, p, o, indice, reg, med, i);
+        vista->aggiornaApp();
+        emit close();
+    } catch (std::exception* exc) {
+        vista->showErrorMessage(exc->what());
+    }
 }
 
 void Dialog::modificaTecnico()
@@ -382,8 +409,11 @@ void Dialog::modificaTecnico()
     unsigned short o = ore->value();
     int r = reparto->currentIndex();
 
-    controller->modificaTecnico(name, e, p, o, r, i);
-
-    vista->aggiornaApp();
-    emit close();
+    try {
+        controller->modificaTecnico(name, e, p, o, r, i);
+        vista->aggiornaApp();
+        emit close();
+    } catch (std::exception* exc) {
+        vista->showErrorMessage(exc->what());
+    }
 }
