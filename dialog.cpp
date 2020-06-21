@@ -295,18 +295,10 @@ void Dialog::creaTecnico()
     unsigned short e = eta->value();
     double p = paga->value();
     unsigned short o = ore->value();
-    unsigned int indice = corso->currentIndex();
+    unsigned int r = reparto->currentIndex();
 
     try {
-        if (indice == 0) {
-            controller->nuovoTecnico(name, e, p, o, server);
-        }
-        if (indice == 1) {
-            controller->nuovoTecnico(name, e, p, o, laboratorio);
-        }
-        if (indice == 2) {
-            controller->nuovoTecnico(name, e, p, o, ufficio);
-        }
+        controller->nuovoTecnico(name, e, p, o, r);
         vista->aggiornaApp();
         emit close();
     } catch (std::exception* exc) {
