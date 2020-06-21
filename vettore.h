@@ -191,36 +191,39 @@ T& Vettore<T>::operator[](unsigned int i) const
 template<class T>
 typename Vettore<T>::Iteratore Vettore<T>::itBegin() const
 {
-    Vettore<T>::Iteratore it(container);
+    Iteratore it(container);
     return it;
 }
 
 template<class T>
 typename Vettore<T>::Iteratore Vettore<T>::itEnd() const
 {
-    Vettore<T>::Iteratore it(container + _size);
+    Iteratore it(container + _size);
     return it;
 }
 
 template<class T>
 typename Vettore<T>::ConstIteratore Vettore<T>::citBegin() const
 {
-    Vettore<T>::ConstIteratore cit(container);
+    ConstIteratore cit(container);
     return cit;
 }
 
 template<class T>
 typename Vettore<T>::ConstIteratore Vettore<T>::citEnd() const
 {
-    Vettore<T>::ConstIteratore cit(container + _size);
+    ConstIteratore cit(container + _size);
     return cit;
 }
 
 template<class T>
 void Vettore<T>::erase(Vettore::Iteratore pos)
 {
-    for (Iteratore it = itBegin(); it != pos && it != itEnd(); ++it) {
-        *it = *(++it);
+    Iteratore it = pos;
+    while (pos != itEnd())
+    {
+        *it = *(++pos);
+        ++it;
     }
     _size--;
 }

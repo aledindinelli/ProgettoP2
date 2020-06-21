@@ -52,15 +52,15 @@ unsigned short Studente::tasse() const
 double Studente::costo() const
 {
     if (corso == ingegneria) {
-        return 900 - tasse();
+        return 1150 - tasse();
     }
     if (corso == informatica) {
-        return 850 - tasse();
+        return 1050 - tasse();
     }
     if (corso == psicologia) {
-        return 800 - tasse();
+        return 950 - tasse();
     }
-    return 950 - tasse();
+    return 1000 - tasse();
 }
 
 void Studente::migliora()
