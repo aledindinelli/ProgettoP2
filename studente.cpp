@@ -66,7 +66,7 @@ double Studente::costo() const
 void Studente::migliora()
 {
     regolare = true;
-    if (media <= 30) {
+    if (media < 30) {
         media += 1;
     }
 }
